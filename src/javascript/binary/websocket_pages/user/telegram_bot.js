@@ -7,7 +7,7 @@ const TelegramBot = (() => {
         const bot_name = 'binary_test_bot';
 
         FormManager.init(form, [
-            { selector: '#token', validations: ['req'], exclude_request: 1 },
+            { selector: '#token', validations: ['req', ['regular', { regex: /^[\w\d]+\-?[\w\d]+$/, message: 'Please enter a valid token.' }]], exclude_request: 1 },
         ]);
 
         FormManager.handleSubmit({
