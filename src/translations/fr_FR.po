@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: binary-static\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2017-10-10 05:53-0400\n"
+"PO-Revision-Date: 2017-10-20 05:00-0400\n"
 "Last-Translator: binarycom <jy@binary.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -1353,8 +1353,8 @@ msgstr "B. Périmètre"
 msgid "BIEL Terms"
 msgstr "Conditions BIEL"
 
-msgid "BIEL forms part of <a href=\"%1\" target=\"_blank\">the Investor Compensation Scheme</a> (the \"Scheme\") which is a rescue fund for investors that are clients of failed investment firms licensed by the MFSA. The Scheme covers 90% of the Company's net liability to a client in respect of investments which qualify for compensation under the Investment Services Act subject to a maximum payment to any one person of €20,000. The Scheme is based on EC Directive 97/9."
-msgstr "BIEL fait partie du <a href=\"%1\" target=\"_blank\">Système d'indemnisation des investisseurs</a> (le « Système »), un fonds d'indemnisation dédié aux investisseurs clients de sociétés d'investissement en faillite détenant une licence de la MFSA. Le Système couvre 90 % des créances de la Société envers un client, sur la base des investissements éligibles en vertu de la Loi sur les services d'investissement, dans la limite d'une indemnisation maximale de 20 000 € par personne. Le Système se fonde sur la directive 97/9/CE."
+msgid "BIEL forms part of %1the Investor Compensation Scheme%2 (the \"Scheme\") which is a rescue fund for investors that are clients of failed investment firms licensed by the MFSA. The Scheme covers 90% of the Company's net liability to a client in respect of investments which qualify for compensation under the Investment Services Act subject to a maximum payment to any one person of €20,000. The Scheme is based on EC Directive 97/9."
+msgstr ""
 
 msgid "BIEL is a company established in Malta under registration number C70156 and having its registered office at Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta."
 msgstr "BIEL est une société basée à Malte sous le numéro d'inscription C70156. Ses bureaux se situent à l'adresse Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malte."
@@ -3578,6 +3578,9 @@ msgstr "Bénéfice brut et net"
 msgid "Group History"
 msgstr "Histoire du groupe"
 
+msgid "Guide"
+msgstr ""
+
 msgid "H. Monitoring and Review"
 msgstr "H. Contrôle et révision"
 
@@ -3902,8 +3905,8 @@ msgstr "Si vous ne recevez pas le mail dans les minutes suivantes, veuillez vér
 msgid "If you fail to immediately make a full settlement of the sum due to us in accordance with this Agreement, we reserve the right to accrue interest on the sums due from you to us in respect of any Transaction that you fail to pay on the relevant due date. Interest will accrue on a daily basis from the relevant due date until the date on which payment is received in full at the bank's official base rate for short term funds determined by us, and will be payable on demand."
 msgstr "Si vous échouez à immédiatement faire un règlement complet des sommes qui nous sommes dues en accord avec ce Contrat, nous nous réservons le droit de retenir des intérêts sur les sommes que vous nous devez par rapport à n'importe Transaction que vous échouez à payer à la date correspondante. Les intérêts seront composés sur une base journalière à partir de la date pertinente jusqu'à la date où le paiement est reçu en totalité à partir du taux de base officiel de la banque pour les fonds à court terme déterminé par nous, et sera payable sur demande."
 
-msgid "If you find any vulnerabilities in our <a target='_blank' href='%1'>open-source code</a>, feel free to submit a pull request on GitHub."
-msgstr "Si vous trouvez des vulnérabilités dans notre <a target='_blank' href='%1'>code source ouvert</a>, n'hésitez pas à nous soumettre une requête sur GitHub."
+msgid "If you find any vulnerabilities in our %1open-source code%2, feel free to submit a pull request on GitHub."
+msgstr ""
 
 msgid "If you have entered into more than one Open Position in the same market, any closing Transaction that you place in the same market will close the Open Positions in the chronological order in which the Open Positions were first created on a first in first out basis."
 msgstr "Si vous êtes entré dans une ou plusieurs Position Ouverte dans le même marché, toute fermeture de Transaction qui s'effectue dans le même marché fermera les Positions Ouvertes dans l'ordre chronologique dans lequel les Positions Ouvertes étaient d'abord créés sur la base du premier entré premier sorti."
@@ -4085,8 +4088,8 @@ msgstr ""
 msgid "Improvements"
 msgstr "Améliorations"
 
-msgid "In April, <a target='_blank' href='http://www.betonmarkets.com'>Betonmarkets.com</a> (formerly known as <a target='_blank' href='http://www.xodds.com'>Xodds.com</a>) goes live, establishing a round-the-clock financial betting service on a variety of financial indices. Business grows quickly, and we soon become the market leader in fixed-odds financial betting."
-msgstr "En avril, <a target='_blank' href='http://www.betonmarkets.com'>Betonmarkets.com</a> (anciennement <a target='_blank' href='http://www.xodds.com'>Xodds.com</a>) est lancé sur le Web pour offrir un service de spéculation financière en continu sur différents indices financiers. Notre croissance est rapide et nous nous positionnons bientôt au sommet du marché de la spéculation sur instruments dérivés."
+msgid "In April, %1Betonmarkets.com%2 (formerly known as %3Xodds.com%2) goes live, establishing a round-the-clock financial betting service on a variety of financial indices. Business grows quickly, and we soon become the market leader in fixed-odds financial betting."
+msgstr ""
 
 msgid "In October 1999, Regent Markets receives US$ 2 million investment funding from Jim Mellon through his Regent Pacific Group, a Hong Kong based fund management company."
 msgstr "En octobre 1999, Regent Markets perçoit 2 millions de dollars US octroyés par Jim Mellon par le biais du Regent Pacific Group, une société de gestion de fonds basée à Hong Kong."
@@ -4917,7 +4920,7 @@ msgstr "Rejoignez notre équipe de professionnels talentueux et motivés. Collab
 msgid "Join our team of bright, talented professionals. Work collaboratively with us to promote a high-tech platform that has been one of the most recognised in the binary options trading industry for over 15 years."
 msgstr "Rejoignez notre équipe de professionnels talentueux et motivés. Collaborez avec nous afin d'améliorer et de promouvoir une plateforme de pointe figurant parmi les plus reconnues du marché des options binaires depuis plus de 15 ans."
 
-msgid "Join the conversion in our social channels for all news and updates related to our upcoming ICO."
+msgid "Join the conversation on our social channels for all news and updates related to our upcoming ICO."
 msgstr ""
 
 msgid "Joshua Cavallaro <span> Markets And You Trader</span>"
@@ -5943,6 +5946,9 @@ msgstr "Ouvrir un compte démo"
 msgid "Open a Financial Account"
 msgstr "Ouvrir un compte financier"
 
+msgid "Open a Real Account"
+msgstr ""
+
 msgid "Open a free account"
 msgstr "Ouvrir un compte gratuit"
 
@@ -6033,7 +6039,7 @@ msgstr "Notre politique"
 msgid "Our Prices are determined by reference to the price of the underlying instrument which is quoted on external exchanges or dealing facilities that we select at our discretion. Our IT infrastructure and price aggregator system facilitates the reception of quotes from shortlisted prime brokers who act as liquidity providers for us and the delivery of the quotes, derived with reference against relevant benchmark and markets, to you. You acknowledge that our Prices may differ from the bid and offer prices made available by external exchanges or dealing facilities and we are not liable for any losses that you incur arising from such differences. This clause does not apply to Volatility Indices."
 msgstr "Nos prix sont déterminés par référence au prix de l'instrument sous jacent qui est coté sur des structures d'échanges externes que nous sélectionnons en fonction de notre jugement. Notre infrastructure technologique et notre système d'agrégation des prix facilite la réception des quotations à partir d'une liste de courtiers pré sélectionnés qui agissent en tant que fournisseur de liquidité pour nous et la livraison des quotations, dérivée avec référence contre les marchés et benchmarks pour vous. Vous confirmez que nos prix peuvent varier entre la mise et l'offre fournis par nos structures externes d'échanges et que nous ne sommes responsables d'aucunes pertes que vous pourriez engendrer du fait de ces differences. Cette clause ne s'applique pas aux Indices de Volatilité."
 
-msgid "Our back-end code is mainly in Perl, and our open-source contributions may be found on <a target=\"_blank\" href=\"%1\">CPAN</a>. The corresponding source code can be found in our <a target=\"_blank\" href=\"%2\">Github repositories</a> that start with the prefix \"perl-\". We welcome contributions to these repositories, notably improved documentation and test coverage."
+msgid "Our back-end code is mainly in Perl, and our open-source contributions may be found on %1CPAN%2. The corresponding source code can be found in our %3Github repositories%2 that start with the prefix \"perl-\". We welcome contributions to these repositories, notably improved documentation and test coverage."
 msgstr ""
 
 msgid "Our commitment to integrity and reliability means that we always strive to give you access to the best pricing and liquidity possible."
@@ -6858,8 +6864,8 @@ msgstr "Regent Markets perçoit les fonds necessaires pour offrir ses services d
 msgid "Regent Markets sets up a programming centre in Cyberjaya, Malaysia"
 msgstr "Regent Markets met en place un centre de programmation à Cyberjaya, en Malaisie"
 
-msgid "Regent Pacific Group Ltd., the Hong Kong-listed founding shareholder of %1, <a href='%2' target='_blank'>disposes of its stake</a> at a valuation of US$ 50.5 million."
-msgstr "Regent Pacific Group Ltd., le groupe actionnaire fondateur de %1 côté en bouse à Hong Kong, <a href='%2' target='_blank'>détient une participation</a> estimée à 50,5 millions de dollars US."
+msgid "Regent Pacific Group Ltd., the Hong Kong-listed founding shareholder of %1, %2disposes of its stake%3 at a valuation of US$ 50.5 million."
+msgstr ""
 
 msgid "Regent Pacific transaction"
 msgstr "Transaction Regent Pacific"
@@ -7286,6 +7292,9 @@ msgstr "La saisie doit être inférieure à %1"
 
 msgid "Should be more than %1"
 msgstr "Devrait être plus de %1"
+
+msgid "Should start with letter or number, and may contain hyphen and underscore."
+msgstr ""
 
 msgid "Should these expenses not be covered by funds in your account we reserve the right to investigate other alternative means for obtaining payment, for example: should your account have generated purchasing accounts, we will hold payment of commission for these accounts until such a time as the account for damages has been cleared."
 msgstr "Dans l'éventualité où ces dépenses ne pourraient être couvertes par les fonds disponibles sur votre compte, nous nous réservons le droit de rechercher d'autres moyens alternatifs d'obtenir le paiement, par exemplenbsp: si votre compte a généré des comptes d'achat, nous suspendrons le paiement des commissions associées à ces comptes, jusqu'à ce que le montant correspondant au préjudice ait été réglé."
@@ -8443,6 +8452,9 @@ msgstr "Cette fonction s'applique uniquement aux comptes des agents de paiement.
 msgid "This field is required."
 msgstr "Ce champ est requis."
 
+msgid "This is a %1Bitcoin Cash%2 (BCH) account. Please note that Bitcoin Cash is not the same as Bitcoin."
+msgstr ""
+
 msgid "This is a staging server - For testing purposes only"
 msgstr "Il s'agit d'un serveur intermédiaire, utilisé uniquement à des fins de test"
 
@@ -8485,8 +8497,8 @@ msgstr "Ce site Web contient des liens vers d'autres sites et peut contenir des 
 msgid "This website does not collect personally identifying information about you except when you specifically and knowingly provide it. There is a technology called \"cookies\" which can be used to provide tailored information from a website. A cookie is an element of data that a website can send to your browser, which may then store it on your system. You can set your browser to notify you when you receive a cookie, giving you the chance to decide whether to accept it. If you do not accept the cookie, then you will need to input your loginID and password again at every form required to enter into the system. You are advised to choose this option if you have concerns about the security of your personal browser or PC."
 msgstr "Ce site Web ne recueille pas de données personnelles vous concernant, sauf celles que vous nous fournissez pour des besoins spécifiques et en toute connaissance de cause. Il existe des fichiers nommés « cookies » qui peuvent être utilisés pour fournir des informations spécifiques depuis un site Web. Un cookie est un fichier de données qu'un site Web peut envoyer à votre navigateur, qui peut ensuite le stocker sur votre système. Vous pouvez configurer votre navigateur pour qu'il vous envoie une notification lorsque vous recevez un cookie, afin de pouvoir décider de l'accepter ou non. Si vous n'acceptez pas le cookie, vous devrez à nouveau saisir votre identifiant de connexion et votre mot de passe pour chaque formulaire requis pour entrer dans le système. Nous vous conseillons de choisir cette option si vous avez des doutes quant à la sécurité de votre navigateur personnel ou de votre PC."
 
-msgid "This website is marketed in the UK and Isle of Man by Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission - <a href='%1' target='_blank'>view license</a>. This website is marketed in the rest of the EU, for investment products by Binary Investments (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated as a Category 3 Investment Services provider by the Malta Financial Services Authority (license no. IS/70156), and for betting products by Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta, licence no MGA/CL2/118/2000, 26th May 2015 and for UK clients by (2) the UK Gambling Commission - <a href='%2' target='_blank'>view license</a>, and for Irish clients by (3) the Revenue Commissioners in Ireland, current Remote Bookmaker's Licence issued on 1 July 2017 (licence no. 1010285). This website's services are not made available in certain countries such as the USA, Costa Rica, Hong Kong, or to persons under age 18."
-msgstr "Ce site internet est commercialisé au Royaume-Uni et l’île de Man par Binary (IOM) Ltd., premier étage, Millennium House, Victoria Road, Douglas, IM2 4RW, île de Man, îles britanniques, autorisée et réglementée par (1) la Commission de Supervision des Jeux dans l’île de Man, îles britanniques, licence actuelle de paris en ligne émise le 31 août 2012 et pour les clients britanniques par (2) la Commission des Jeux du Royaume-Uni - <a href='%1' target='_blank'> Afficher la licence</a>. Ce site internet est commercialisé dans le reste de l’UE, pour des produits d’investissement par Binary Investment (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malte, licencié et régulé comme un fournisseur de Services d’investissement de catégorie 3 par les Autorités des Services Financiers de Malte (n° de licence. EST / 70156), et pour les produits de paris par Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malte, autorisés et réglementés par (1) l'Autorité des Jeux de Malte à Malte, numéro de licence MGA/CL2/118/2000, 26 mai 2015 et pour les clients britanniques par (2) la Commission des Jeux du Royaume-Uni - <a href='%2' target='_blank'> Afficher la licence</a> et pour les clients irlandais par (3) l’administration fiscale en Irlande , licence actuelle de prise de paris à distance émise le 1er juillet 2017 (numéro de licence 1010285). Les services du site Internet ne sont pas rendus disponibles dans certains pays comme les Etats-Unis, le Costa Rica, Hong Kong, ou aux personnes de moins de 18 ans."
+msgid "This website is marketed in the UK and Isle of Man by Binary (IOM) Ltd., First Floor, Millennium House, Victoria Road, Douglas, IM2 4RW, Isle of Man, British Isles, licenced and regulated by (1) the Gambling Supervision Commission in the Isle of Man, British Isles, current online gambling licence issued on 31 August 2012, and for UK clients by (2) the UK Gambling Commission - %1view license%2. This website is marketed in the rest of the EU, for investment products by Binary Investments (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated as a Category 3 Investment Services provider by the Malta Financial Services Authority (license no. IS/70156), and for betting products by Binary (Europe) Ltd., Mompalao Building, Suite 2, Tower Road, Msida MSD1825, Malta, licenced and regulated by (1) the Malta Gaming Authority in Malta, licence no MGA/CL2/118/2000, 26th May 2015 and for UK clients by (2) the UK Gambling Commission - %3view license%2, and for Irish clients by (3) the Revenue Commissioners in Ireland, current Remote Bookmaker's Licence issued on 1 July 2017 (licence no. 1010285). This website's services are not made available in certain countries such as the USA, Costa Rica, Hong Kong, or to persons under age 18."
+msgstr ""
 
 msgid "Thorough knowledge of bash scripting, as well as experience with scripting languages such as Perl and PHP"
 msgstr "Solide connaissance des scripts Bash et expérience des langages de script tels que Perl et PHP"
@@ -8749,8 +8761,11 @@ msgstr "Limites de Trading et de Retrait"
 msgid "Trading binary options is relatively easy, and you can purchase a trade in only three simple steps."
 msgstr "Le trading d'options binaires est relativement simple et vous permet d'acheter une option en trois étapes seulement."
 
-msgid "Trading binary options may not be suitable for everyone, so please ensure that you fully understand the risks involved. Your losses can exceed your initial deposit and you do not own or have any interest in the underlying asset. In regards to binary options which are gambling products, remember that gambling can be addictive - please play responsibly. <span class=\"ja-hide\">Read about <a href=\"%1\">Responsible Trading</a>.</span>"
-msgstr "Le trading d'options binaires ne convient pas nécessairement à tout le monde et vous devez vous assurer de bien comprendre les risques associés. Vos pertes peuvent excéder votre dépôt initial et vous ne détenez aucune partie de l'actif sous-jacent. Les options binaires sont des produits apparentés aux jeux d'argent. N'oubliez pas que ces derniers peuvent s'avérer addictifs : jouez de manière responsable. <span class=\"ja-hide\">Lisez notre article consacré au <a href=\"%1\">trading responsable</a>.</span>"
+msgid "Trading binary options may not be suitable for everyone, so please ensure that you fully understand the risks involved. Your losses can exceed your initial deposit and you do not own or have any interest in the underlying asset. In regards to binary options which are gambling products, remember that gambling can be addictive - please play responsibly. Read about %1Responsible Trading%2."
+msgstr ""
+
+msgid "Trading binary options may not be suitable for everyone, so please ensure that you fully understand the risks involved. Your losses can exceed your initial deposit and you do not own or have any interest in the underlying asset. In regards to binary options which are gambling products, remember that gambling can be addictive - please play responsibly. Read about <a href=\"%1\">Responsible Trading</a>."
+msgstr ""
 
 msgid "Trading forex and contracts for differences carries a high level of risk and %1 does not monitor the open positions of your account on your behalf. It is your responsibility to monitor your Open Positions and understand the exposure of your Open Positions whilst ensuring that your exposure commensurate with your risk appetite. Due to the cost associated with overnight open positions, you should consider investing in the market of the instrument in which you ordinarily transact in instead of investing in a CFD."
 msgstr "Les échanges forex et contrats pour différences contiennent un niveau de risque élevé et %1 ne contrôle pas les positions ouvertes de votre compte à votre place. Il est de votre responsabilité de contrôler vos Positions Ouvertes et comprendre l'exposition de vos Positions Ouvertes tout en vous assurant que votre exposition est proportionnel à votre appétit pour le risque. En raison du coût associé avec vos positions ouvertes de nuit, vous devriez considérer investir dans le marché de l'instrument dans lequel vous traitez ordinairement au lieu d'investir dans un CFD."
@@ -8983,12 +8998,6 @@ msgstr "Mise à jour des paramètres"
 msgid "Update the Anti-Fraud Manual and other related documents"
 msgstr "Mise à jour du manuel de lutte anti-fraude et d'autres documents pertinents"
 
-msgid "Upgrade to a Financial Account"
-msgstr "Ouvrir un compte financier"
-
-msgid "Upgrade to a Real Account"
-msgstr "Ouvrir un compte réel"
-
 msgid "Upon closing a Transaction, the realised profit (or loss), which is represented by the difference between the opening level and closing level of the Transaction multiplied by the number of lots (volume), becomes due and payable by us to you (or due and payable by you to us in cases of realised loss)."
 msgstr "A la fermeture d'une Transaction, le profit (ou perte) réalisé, qui est représenté par la différence entre le niveau d'ouverture et le niveau de fermeture de la Transaction multipliée par le nombre de lots (volume), devient dû et payable par nous à vous (ou dû et payable par vous à nous en cas de pertes réalisées)."
 
@@ -9157,9 +9166,6 @@ msgstr "En attente du tick d'entrée."
 msgid "Waiting for exit tick."
 msgstr "En attente du tick de sortie."
 
-msgid "Walkthrough Guide"
-msgstr "Guide interactif"
-
 msgid "Want to fund your %1 Real Account? <a href=\"%2\">Go to the Cashier</a>"
 msgstr "Vous voulez financer votre compte réel %1 ? <a href=\"%2\"> aller à la caisse</a>"
 
@@ -9223,11 +9229,11 @@ msgstr "Nous détenons toutes les autorisations réglementaires en vigueur dans 
 msgid "We are looking for energetic and enthusiastic individuals who love challenges, are detail-oriented and highly analytical to join our Internal Audit team."
 msgstr "Nous recrutons au sein de notre équipe d'audit interne des personnes dynamiques, enthousiastes et rigoureuses, dotées d'excellentes compétences analytiques et aimant relever les défis."
 
-msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
-msgstr "En vertu de notre licence, nous sommes dans l'obligation de vous informer du traitement des fonds que nous détenons sur un compte en votre nom, ainsi que de l'étendue de la protection de ces fonds en cas d'insolvabilité <a href='%1' target='_blank'>%1</a>."
+msgid "We are required by our licence to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency %1."
+msgstr ""
 
-msgid "We are required by our license to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency <a href='%1' target='_blank'>%1</a>."
-msgstr "En vertu de notre licence, nous sommes dans l'obligation de vous informer du traitement des fonds que nous détenons sur un compte en votre nom, ainsi que de l'étendue de la protection de ces fonds en cas d'insolvabilité <a href='%1' target='_blank'>%1</a>."
+msgid "We are required by our license to inform you about what happens to funds which we hold on account for you, and the extent to which funds are protected in the event of insolvency %1."
+msgstr ""
 
 msgid "We are required to do so in accordance with any relevant law or regulation."
 msgstr "Nous sommes requis de le faire en accord avec toute loi ou régulation pertinente."
@@ -9760,8 +9766,8 @@ msgstr "VOUS DÉCLAREZ ET GARANTISSEZ QUE VOUS ACCÉDEZ À CES PAGES WEB A DES F
 msgid "Year"
 msgstr "Année"
 
-msgid "Yes, but we'd prefer you to submit security vulnerabilities via our <a target=\"_blank\" href=\"%1\">bug bounty</a> program."
-msgstr "Oui, mais nous préférons que vous présentez des failles de sécurité par l’intermédiaire de notre programme de <a target=\"_blank\" href=\"%1\"> primes de bug</a>."
+msgid "Yes, but we'd prefer you to submit security vulnerabilities via our %1bug bounty%2 program."
+msgstr ""
 
 msgid "Yes. Please contact your account manager if you would like a customized banner and provide him/her with the following information:"
 msgstr "Oui. Veuillez contacter votre gestionnaire de compte si vous souhaitez une bannière personnalisée et lui fournir les informations suivantes :"
@@ -11193,6 +11199,9 @@ msgstr "{JAPAN ONLY}Financial Instruments Business No. xxxx"
 
 msgid "{JAPAN ONLY}Financial Instruments Mediation Assistance Center"
 msgstr "{JAPAN ONLY}Financial Instruments Mediation Assistance Center"
+
+msgid "{JAPAN ONLY}Footer regulatory text"
+msgstr ""
 
 msgid "{JAPAN ONLY}For a call option, if the price of the underlying asset is higher than the option exercise price, it is know as an in-the-money option."
 msgstr "{JAPAN ONLY}For a call option, if the price of the underlying asset is higher than the option exercise price, it is know as an in-the-money option."
