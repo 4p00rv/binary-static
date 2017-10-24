@@ -27,10 +27,11 @@ const Header = (() => {
         if (menu && Client.isLoggedIn()) {
             menu.classList.add('smaller-font');
             displayAccountStatus();
-            if (!Client.get('virtual')) {
+            if (!Client.get('is_virtual')) {
                 BinarySocket.wait('website_status', 'authorize', 'balance').then(() => {
                     if (Client.canTransferFunds()) {
-                        document.getElementById('user_menu_account_transfer').setVisibility(1);
+                        const transfer = document.getElementById('user_menu_account_transfer');
+                        if (transfer) transfer.setVisibility(1);
                     }
                 });
             }
@@ -101,13 +102,16 @@ const Header = (() => {
     const loginIDOnClick =  (e) => {
         e.preventDefault();
         const el_loginid = e.target.closest('A');
-        el_loginid.setAttribute('disabled', 'disabled');
-        switchLoginid(el_loginid.getAttribute('data-value'));
+        if (el_loginid) {
+            el_loginid.setAttribute('disabled', 'disabled');
+            switchLoginid(el_loginid.getAttribute('data-value'));
+        }
     };
 
     const metatraderMenuItemVisibility = (landing_company_response) => {
         if (MetaTrader.isEligible(landing_company_response)) {
-            document.getElementById('user_menu_metatrader').setVisibility(1);
+            const metatrader = document.getElementById('user_menu_metatrader');
+            if (metatrader) metatrader.setVisibility(1);
         }
     };
 
@@ -131,14 +135,15 @@ const Header = (() => {
             const landing_company = State.getResponse('landing_company');
             const upgrade_msg     = document.getElementsByClassName('upgrademessage');
 
-            const showUpgrade = (url, msg) => {
-                const span = createElement('span', { text: localize(msg) });
+            if (!upgrade_msg) {
+                return;
+            }
 
+            const showUpgrade = (url, msg) => {
                 applyToAllElements(upgrade_msg, (el) => {
                     el.setVisibility(1);
                     applyToAllElements('a', (ele) => {
-                        ele.setVisibility(1).setAttribute('href', Url.urlFor(url));
-                        ele.html(span);
+                        ele.html(createElement('span', { text: localize(msg) })).setVisibility(1).setAttribute('href', Url.urlFor(url));
                     }, '', el);
                 });
             };
@@ -146,6 +151,7 @@ const Header = (() => {
             const jp_account_status = State.getResponse('get_settings.jp_account_status.status');
             const upgrade_info      = Client.getUpgradeInfo(landing_company, jp_account_status);
             const show_upgrade_msg  = upgrade_info.can_upgrade;
+            const virtual_text      = document.getElementById('virtual-text');
 
             if (Client.get('is_virtual')) {
                 applyToAllElements(upgrade_msg, (el) => {
@@ -163,28 +169,28 @@ const Header = (() => {
                         showUpgrade('/new_account/knowledge_testws', '{JAPAN ONLY}Take knowledge test');
                     } else if (show_upgrade_msg || (has_disabled_jp && jp_account_status !== 'disabled')) {
                         applyToAllElements(upgrade_msg, (el) => { el.setVisibility(1); });
-                        if (jp_account_status === 'jp_activation_pending') {
-                            if (document.getElementsByClassName('activation-message').length === 0) {
-                                document.getElementById('virtual-text').appendChild(createElement('div', { class: 'activation-message', text: ` ${localize('Your Application is Being Processed.')}` }));
-                            }
-                        } else if (jp_account_status === 'activated') {
-                            if (document.getElementsByClassName('activated-message').length === 0) {
-                                document.getElementById('virtual-text').appendChild(createElement('div', { class: 'activated-message', text: ` ${localize('{JAPAN ONLY}Your Application has Been Processed. Please Re-Login to Access Your Real-Money Account.')}` }));
-                            }
+                        if (!virtual_text) {
+                            return;
+                        }
+                        if (jp_account_status === 'jp_activation_pending' && !document.getElementsByClassName('activation-message')) {
+                            virtual_text.appendChild(createElement('div', { class: 'activation-message', text: ` ${localize('Your Application is Being Processed.')}` }));
+                        } else if (jp_account_status === 'activated' && !document.getElementsByClassName('activated-message')) {
+                            virtual_text.appendChild(createElement('div', { class: 'activated-message', text: ` ${localize('{JAPAN ONLY}Your Application has Been Processed. Please Re-Login to Access Your Real-Money Account.')}` }));
                         }
                     }
                 } else if (show_upgrade_msg) {
-                    showUpgrade(upgrade_info.upgrade_link, `Upgrade to a ${toTitleCase(upgrade_info.type)} Account`);
+                    showUpgrade(upgrade_info.upgrade_link, `Open a ${toTitleCase(upgrade_info.type)} Account`);
                 } else {
                     applyToAllElements(upgrade_msg, (el) => {
                         applyToAllElements('a', (ele) => {
-                            ele.setVisibility(0);
-                            ele.innerHTML = '';
+                            ele.setVisibility(0).innerHTML = '';
                         }, '', el);
                     });
                 }
             } else if (show_upgrade_msg) {
-                document.getElementById('virtual-text').parentNode.setVisibility(0);
+                if (virtual_text.parentNode) {
+                    virtual_text.parentNode.setVisibility(0);
+                }
                 showUpgrade(upgrade_info.upgrade_link, 'Open a Financial Account');
             } else {
                 applyToAllElements(upgrade_msg, (el) => { el.setVisibility(0); });
@@ -205,9 +211,11 @@ const Header = (() => {
 
     const changeAccountsText = (add_new_style, text) => {
         const user_accounts = document.getElementById('user_accounts');
-        user_accounts.classList[add_new_style ? 'add' : 'remove']('create_new_account');
-        const localized_text = localize(text);
-        applyToAllElements('li', (el) => { elementTextContent(el, localized_text); }, '', user_accounts);
+        if (user_accounts) {
+            user_accounts.classList[add_new_style ? 'add' : 'remove']('create_new_account');
+            const localized_text = localize(text);
+            applyToAllElements('li', (el) => { elementTextContent(el, localized_text); }, '', user_accounts);
+        }
     };
 
     const displayNotification = (message, is_error = false, msg_code = '') => {
@@ -228,6 +236,7 @@ const Header = (() => {
 
     const hideNotification = (msg_code) => {
         const msg_notification = document.getElementById('msg_notification');
+        if (!msg_notification) return;
         if (msg_notification.getAttribute('data-code') === 'STORAGE_NOT_SUPPORTED' ||
             msg_code && msg_notification.getAttribute('data-code') !== msg_code) {
             return;
@@ -257,6 +266,7 @@ const Header = (() => {
             const messages = {
                 authenticate   : () => buildMessage('[_1]Authenticate your account[_2] now to take full advantage of all payment methods available.',     'user/authenticate'),
                 currency       : () => buildMessage('Please set the [_1]currency[_2] of your account.',                                                   'user/set-currency'),
+                document_review: () => buildMessage('We are reviewing your documents. For more details [_1]contact us[_2].',                              'contact'),
                 financial_limit: () => buildMessage('Please set your [_1]30-day turnover limit[_2] to remove deposit limits.',                            'user/security/self_exclusionws'),
                 residence      : () => buildMessage('Please set [_1]country of residence[_2] before upgrading to a real-money account.',                  'user/settings/detailsws'),
                 risk           : () => buildMessage('Please complete the [_1]financial assessment form[_2] to lift your withdrawal and trading limits.',  'user/settings/assessmentws'),
@@ -268,6 +278,7 @@ const Header = (() => {
             const validations = {
                 authenticate   : () => +get_account_status.prompt_client_to_authenticate,
                 currency       : () => !Client.get('currency'),
+                document_review: () => /document_under_review/.test(status),
                 financial_limit: () => /ukrts_max_turnover_limit_not_set/.test(status),
                 residence      : () => !Client.get('residence'),
                 risk           : () => riskAssessment(),
@@ -283,6 +294,7 @@ const Header = (() => {
                 'risk',
                 'tax',
                 'currency',
+                'document_review',
                 'authenticate',
                 'unwelcome',
             ];

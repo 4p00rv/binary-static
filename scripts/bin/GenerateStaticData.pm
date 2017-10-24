@@ -38,8 +38,7 @@ sub _texts {
         push @texts, localize('Sorry, an error occurred while processing your request.');
         push @texts, localize('Please <a href="[_1]">log in</a> to view this page.');
         # top bar
-        push @texts, localize('Upgrade to a Real Account');
-        push @texts, localize('Upgrade to a Financial Account');
+        push @texts, localize('Open a Real Account');
         push @texts, localize('Open a Financial Account');
         # menu items
         push @texts, localize('Trade');
@@ -253,11 +252,11 @@ sub _texts {
         push @texts, localize('Delete');
         push @texts, localize('Are you sure that you want to permanently delete token');
         push @texts, localize('Please select at least one scope');
-        #strings for Walkthrough Guide
-        push @texts, localize('Walkthrough Guide');
+        #strings for Guide
+        push @texts, localize('Guide');
         push @texts, localize('Finish');
         push @texts, localize('Step');
-        #strings for Walkthrough Guide -> trading page
+        #strings for Guide -> trading page
         push @texts, localize('Select your market');
         push @texts, localize('Select your underlying asset');
         push @texts, localize('Select your trade type');
@@ -480,6 +479,7 @@ sub _texts {
         push @texts, localize('Hint: it would take approximately [_1][_2] to crack this password.');
         push @texts, localize('thousand');
         push @texts, localize('million');
+        push @texts, localize('Should start with letter or number, and may contain hyphen and underscore.');
 
         # strings for metatrader
         push @texts, localize('Congratulations! Your [_1] Account has been created.');
@@ -518,6 +518,7 @@ sub _texts {
         push @texts, localize('Connection error: Please check your internet connection.');
         push @texts, localize('You have reached the rate limit of requests per second. Please try later.');
         push @texts, localize('[_1] requires your browser\'s web storage to be enabled in order to function properly. Please enable it or exit private browsing mode.');
+        push @texts, localize('We are reviewing your documents. For more details [_1]contact us[_2].');
         # browser-update message
         push @texts, localize('Your web browser ([_1]) is out of date and may affect your trading experience. Proceed at your own risk. [_2]Update browser[_3]');
 
@@ -553,6 +554,16 @@ sub _texts {
         push @texts, localize('Ether');
         push @texts, localize('Ether Classic');
         push @texts, localize('Litecoin');
+
+        # Authentication errors
+        push @texts, localize('Invalid document format: "[_1]"');
+        push @texts, localize('File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB');
+        push @texts, localize('ID number is required for [_1].');
+        push @texts, localize('Only letters, numbers, space, underscore, and hyphen are allowed for ID number.');
+        push @texts, localize('Expiry date is required for [_1].');
+        push @texts, localize('Passport');
+        push @texts, localize('ID card');
+        push @texts, localize('Driving licence');
 
         my %as_hash = @texts;
         $js .= "texts_json['" . $language . "'] = " . JSON::to_json(\%as_hash) . ";\n";
