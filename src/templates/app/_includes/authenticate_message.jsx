@@ -39,45 +39,38 @@ const FileSelector = ({
                                     <React.Fragment key={i}>
                                         <h3>{document.name}</h3>
                                         <div className='fields'>
-                                            <React.Fragment>
                                                 {!document.input ? null :
                                                     (
-                                                        <div className='gr-row form-row center-text-m'>
-                                                            <div className='gr-4 gr-12-m'>
-                                                                <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
+                                                        <React.Fragment>
+                                                            <div className='gr-row form-row center-text-m'>
+                                                                <div className='gr-4 gr-12-m'>
+                                                                    <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
+                                                                </div>
+                                                                <div className='gr-8 gr-12-m'>
+                                                                    <input id={`id_number_${j}`} type='text' maxLength='30' />
+                                                                </div>
                                                             </div>
-                                                            <div className='gr-8 gr-12-m'>
-                                                                <input id={`id_number_${j}`} type='text' maxLength='30' />
+                                                            <div className='gr-row form-row center-text-m'>
+                                                                <div className='gr-4 gr-12-m'>
+                                                                    <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
+                                                                </div>
+                                                                <div className='gr-8 gr-12-m'>
+                                                                    <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className='gr-row form-row center-text-m'>
-                                                            <div className='gr-4 gr-12-m'>
-                                                                <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
-                                                            </div>
-                                                            <div className='gr-8 gr-12-m'>
-                                                                <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
-                                                            </div>
-                                                        </div>
+                                                        </React.Fragment>
                                                 )}
                                                 <div className='gr-row form-row center-text-m'>
-                                                    <div className='gr-12'>
-                                                        <input id={`front_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
-                                                        <label htmlFor={`front_file${j}`} className='button'>{it.L('Front Side')} <span className='add' /></label>
-                                                    </div>
-                                                    <div className='gr-12'>
-                                                        <input id={`back_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
-                                                        <label htmlFor={`back_file${j}`} className='button'>{it.L('Reverse Side')} <span className='add' /></label>
-                                                    </div>
+                                                    {document.files.map((file, k) => {
+                                                        const id = Math.floor(Math.random() * 10**10);
+                                                        return (
+                                                            <div className='gr-12' key={k}>
+                                                                <input id={`file_${id}`} data-placeholder={file} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
+                                                                <label htmlFor={`file_${id}`} className='button'>{file} <span className='add' /></label>
+                                                            </div>
+                                                        );
+                                                    })}
                                                 </div>
-                                            </React.Fragment>
-                                            { type === 'poa' && (
-                                                <div className='gr-row form-row gr-centered'>
-                                                    <div className='gr-12'>
-                                                        <input id={`add_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
-                                                        <label htmlFor={`add_file${j}`} className='button'>{it.L('Add')} <span className='add' /></label>
-                                                    </div>
-                                                </div>
-                                            )}
                                         </div>
                                     </React.Fragment>
                                 );
@@ -92,7 +85,7 @@ const FileSelector = ({
 
 
 const AuthenticateMessage = () => (
-    <React.Fragment>
+    <div class="invisible jp-hide">
         <p>{it.L('Authenticate your account by verifying your identity and address.')}</p>
 
         <FileSelector
@@ -109,9 +102,9 @@ const AuthenticateMessage = () => (
             ]}
             type='poi'
             accepted_documents={[
-                { name: it.L('Passport'), value: 'passport', input: true, files: [] },
-                { name: it.L('Identity card'), value: 'proofid', input: true },
-                { name: it.L('Driving licence'), value: 'driverslicense', input: true },
+                { name: it.L('Passport'), value: 'passport', input: true, files: [it.L('Front Side'), it.L('Reverse Side')] },
+                { name: it.L('Identity card'), value: 'proofid', input: true, files: [it.L('Front Side'), it.L('Reverse Side')] },
+                { name: it.L('Driving licence'), value: 'driverslicense', input: true, files: [it.L('Front Side'), it.L('Reverse Side')] },
             ]}
         />
 
@@ -130,8 +123,8 @@ const AuthenticateMessage = () => (
             ]}
             type='poa'
             accepted_documents={[
-                { name: it.L('Utility bill'), value: 'proofaddress' },
-                { name: it.L('Bank statement'), value: 'bankstatement' },
+                { name: it.L('Utility bill'), value: 'proofaddress', files: ['Add'] },
+                { name: it.L('Bank statement'), value: 'bankstatement', files: ['Add'] },
             ]}
         />
 
@@ -143,7 +136,7 @@ const AuthenticateMessage = () => (
                 </a>
             </div>
         </div>
-    </React.Fragment>
+    </div>
 );
 
 export default AuthenticateMessage;

@@ -2,8 +2,8 @@ const DocumentUploader    = require('binary-document-uploader');
 const Client              = require('../../../base/client');
 const displayNotification = require('../../../base/header').displayNotification;
 const BinarySocket        = require('../../../base/socket');
+const jpClient           = require('../../../common/country_base').jpClient;
 const localize            = require('../../../../_common/localize').localize;
-const toTitleCase         = require('../../../../_common/string_util').toTitleCase;
 const Url                 = require('../../../../_common/url');
 const showLoadingImage    = require('../../../../_common/utility').showLoadingImage;
 
@@ -20,6 +20,12 @@ const Authenticate = (() => {
                     if (!/authenticated/.test(status)) {
                         init();
                         $('#not_authenticated').setVisibility(1);
+                        // Show upload instructions
+                        if(jpClient()) {
+
+                        } else {
+                            $('.jp-hide').setVisibility(1);
+                        }
                         let link = 'https://marketing.binary.com/authentication/2017_Authentication_Process.pdf';
                         if (Client.isAccountOfType('financial')) {
                             $('#not_authenticated_financial').setVisibility(1);
@@ -95,9 +101,7 @@ const Authenticate = (() => {
         // Reset file-selector label
         const resetLabel = (event) => {
             const $e = $(event.target);
-            let default_text = toTitleCase($e.attr('id').split('_')[0]);
-            default_text = default_text === 'Back' ? localize('Reverse Side')
-                : localize('Front Side');
+            const default_text = $e.attr('data-placeholder');
             // Keep track of front and back sides of files.
             const doc_type = ($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase();
             const file_type = ($e.attr('id').match(/\D+/g) || [])[0];
