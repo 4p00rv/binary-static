@@ -39,36 +39,37 @@ const FileSelector = ({
                                     <React.Fragment key={i}>
                                         <h3>{document.name}</h3>
                                         <div className='fields'>
-                                            { type === 'poi' && (
-                                                <React.Fragment>
-                                                    <div className='gr-row form-row center-text-m'>
-                                                        <div className='gr-4 gr-12-m'>
-                                                            <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
+                                            <React.Fragment>
+                                                {!document.input ? null :
+                                                    (
+                                                        <div className='gr-row form-row center-text-m'>
+                                                            <div className='gr-4 gr-12-m'>
+                                                                <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
+                                                            </div>
+                                                            <div className='gr-8 gr-12-m'>
+                                                                <input id={`id_number_${j}`} type='text' maxLength='30' />
+                                                            </div>
                                                         </div>
-                                                        <div className='gr-8 gr-12-m'>
-                                                            <input id={`id_number_${j}`} type='text' maxLength='30' />
+                                                        <div className='gr-row form-row center-text-m'>
+                                                            <div className='gr-4 gr-12-m'>
+                                                                <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
+                                                            </div>
+                                                            <div className='gr-8 gr-12-m'>
+                                                                <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
+                                                            </div>
                                                         </div>
+                                                )}
+                                                <div className='gr-row form-row center-text-m'>
+                                                    <div className='gr-12'>
+                                                        <input id={`front_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
+                                                        <label htmlFor={`front_file${j}`} className='button'>{it.L('Front Side')} <span className='add' /></label>
                                                     </div>
-                                                    <div className='gr-row form-row center-text-m'>
-                                                        <div className='gr-4 gr-12-m'>
-                                                            <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
-                                                        </div>
-                                                        <div className='gr-8 gr-12-m'>
-                                                            <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
-                                                        </div>
+                                                    <div className='gr-12'>
+                                                        <input id={`back_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
+                                                        <label htmlFor={`back_file${j}`} className='button'>{it.L('Reverse Side')} <span className='add' /></label>
                                                     </div>
-                                                    <div className='gr-row form-row center-text-m'>
-                                                        <div className='gr-12'>
-                                                            <input id={`front_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
-                                                            <label htmlFor={`front_file${j}`} className='button'>{it.L('Front Side')} <span className='add' /></label>
-                                                        </div>
-                                                        <div className='gr-12'>
-                                                            <input id={`back_file${j}`} className='file-picker' type='file' accept='.jpg, .jpeg, .gif, .png, .pdf' data-type={document.value} />
-                                                            <label htmlFor={`back_file${j}`} className='button'>{it.L('Reverse Side')} <span className='add' /></label>
-                                                        </div>
-                                                    </div>
-                                                </React.Fragment>
-                                            )}
+                                                </div>
+                                            </React.Fragment>
                                             { type === 'poa' && (
                                                 <div className='gr-row form-row gr-centered'>
                                                     <div className='gr-12'>
@@ -108,9 +109,9 @@ const AuthenticateMessage = () => (
             ]}
             type='poi'
             accepted_documents={[
-                { name: it.L('Passport'), value: 'passport' },
-                { name: it.L('Identity card'), value: 'proofid' },
-                { name: it.L('Driving licence'), value: 'driverslicense' },
+                { name: it.L('Passport'), value: 'passport', input: true, files: [] },
+                { name: it.L('Identity card'), value: 'proofid', input: true },
+                { name: it.L('Driving licence'), value: 'driverslicense', input: true },
             ]}
         />
 

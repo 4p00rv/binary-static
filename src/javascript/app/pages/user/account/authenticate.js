@@ -111,7 +111,7 @@ const Authenticate = (() => {
 
         /**
          * Enables the submit button if any file is selected, also adds the event handler for the button.
-         * Disables the button if it no files are selected.
+         * Disables the button if no files are selected.
          */
         let $button;
         const showSubmit = () => {
@@ -120,7 +120,7 @@ const Authenticate = (() => {
             $button = $ele.find('#btn_submit');
             const $files = $ele.find('input[type="file"]');
 
-            // Check if any files are selected or not.
+            // Check if any files are selected
             $files.each((i, e) => {
                 if (e.files && e.files.length) {
                     file_selected = true;
