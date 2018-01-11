@@ -35,14 +35,15 @@ const File = ({
                         return (
                             <div className='gr-12' key={k}>
                                 <input
-                                    id={`file_${k}_${id}`}
+                                    id={`${document.id}_${k}_${id}`}
                                     data-placeholder={file}
+                                    data-name={document.name}
                                     className='file-picker'
                                     type='file'
                                     accept={type.join(', ')}
                                     data-type={document.value}
                                 />
-                                <label htmlFor={`file_${k}_${id}`} className='button'>{file} <span className='add' /></label>
+                                <label htmlFor={`${document.id}_${k}_${id}`} className='button'>{file} <span className='add' /></label>
                             </div>
                         );
                     })}
@@ -154,9 +155,9 @@ const AuthenticateMessage = () => (
                     it.L('Maximum upload size for each file is 3MB'),
                 ]}
                 accepted_documents={[
-                    { name: it.L('Passport'), value: 'passport', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('Identity card'), value: 'proofid', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('Driving licence'), value: 'driverslicense', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('Passport'), value: 'passport', id: 'passport', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('Identity card'), value: 'proofid', id: 'proofid', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('Driving licence'), value: 'driverslicense', id: 'driverslicense', input: true, labels: [it.L('Front Side'), it.L('Reverse Side')] },
                 ]}
             />
 
@@ -175,8 +176,8 @@ const AuthenticateMessage = () => (
                     it.L('Maximum upload size for each file is 3MB'),
                 ]}
                 accepted_documents={[
-                    { name: it.L('Utility bill'), value: 'proofaddress', labels: [it.L('Add')] },
-                    { name: it.L('Bank statement'), value: 'bankstatement', labels: [it.L('Add')] },
+                    { name: it.L('Utility bill'), value: 'proofaddress', id: 'proofaddress', labels: [it.L('Add')] },
+                    { name: it.L('Bank statement'), value: 'bankstatement', id: 'bankstatement', labels: [it.L('Add')] },
                 ]}
             />
         </div>
@@ -195,9 +196,9 @@ const AuthenticateMessage = () => (
                     it.L('Maximum upload size for each file is 3MB'),
                 ]}
                 accepted_documents={[
-                    { name: it.L('Driving licence'), value: 'driverslicense', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('Residence card'), value: 'other', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('My number photo ID card'), value: 'other', input: false, labels: [it.L('Front Side')] },
+                    { name: it.L('Driving licence'), value: 'driverslicense', id: 'driverslicense', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('Residence card'), value: 'other', id: 'residencecard', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('My number photo ID card'), value: 'other', id: 'mynumberphotocard_1', input: false, labels: [it.L('Front Side')] },
                 ]}
             />
 
@@ -210,8 +211,8 @@ const AuthenticateMessage = () => (
                     it.L('Pension book'),
                 ]}
                 accepted_documents={[
-                    { name: it.L('Medical insurance card'), value: 'other', input: false, labels: [it.L('Front Side')] },
-                    { name: it.L('Pension book'), value: 'other', input: false, labels: [it.L('Inside page')] },
+                    { name: it.L('Medical insurance card'), value: 'other', id: 'insurancecard', input: false, labels: [it.L('Front Side')] },
+                    { name: it.L('Pension book'), value: 'other', id: 'pensionbook', input: false, labels: [it.L('Inside page')] },
                 ]}
                 other_rows={[
                     {
@@ -222,9 +223,9 @@ const AuthenticateMessage = () => (
                             it.L('Utility bill (electricity, gas, and water)'),
                         ],
                         documents: [
-                            {name: it.L('Resident records (all pages)'), value: 'other', input: false, labels: [it.L('All pages (pdf)')], type: ['.pdf']},
-                            {name: it.L('Registered seal certificate'), value: 'other', input: false, labels: [it.L('Certificate')]},
-                            {name: it.L('Utility bill (electricity, gas, and water)'), value: 'other', input: false, labels: [it.L('Bill')]},
+                            {name: it.L('Resident records (all pages)'), value: 'other', id: 'residentrecords', input: false, labels: [it.L('All pages (pdf)')], type: ['.pdf']},
+                            {name: it.L('Registered seal certificate'), value: 'other', id: 'sealcertificate', input: false, labels: [it.L('Certificate')]},
+                            {name: it.L('Utility bill (electricity, gas, and water)'), value: 'proofaddress', id: 'utilitybill', input: false, labels: [it.L('Bill')]},
                         ],
                         requirements: [
                             it.L('Must be a clear, colour photo or scanned image'), it.L('Minimum of six months validity'),
@@ -249,8 +250,8 @@ const AuthenticateMessage = () => (
                     it.L('Maximum upload size for each file is 3MB'),
                 ]}
                 accepted_documents={[
-                    { name: it.L('My number non-photo ID card'), value: 'other', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('My number photo ID card'), value: 'other', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('My number non-photo ID card'), value: 'other', id: 'mynumbercard', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
+                    { name: it.L('My number photo ID card'), value: 'other', id: 'mynumberphotocard', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
                 ]}
             />
         </div>

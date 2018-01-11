@@ -21,7 +21,7 @@ const Authenticate = (() => {
                         init();
                         $('#not_authenticated').setVisibility(1);
                         // Show upload instructions
-                        if (!jpClient()) {
+                        if (jpClient()) {
                             $('.jp-show').setVisibility(1);
                         } else {
                             $('.jp-hide').setVisibility(1);
@@ -77,13 +77,10 @@ const Authenticate = (() => {
             showSubmit();
             const $e = $(event.target);
             const file_name = event.target.files[0].name || '';
-            const display_name = file_name.length > 20 ? `${file_name.slice(0, 10)}..${file_name.slice(-10)}` : file_name;
+            const display_name = file_name.length > 20 ? `${file_name.slice(0, 10)}...${file_name.slice(-10)}` : file_name;
 
-            // Keep track of front and back sides of files.
-            const doc_type = ($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase();
-            const file_pos = ($e.attr('id').match(/file_(\d)/) || [])[1] || 0;
-            file_checks[doc_type] = file_checks[doc_type] || [];
-            file_checks[doc_type][file_pos] = true;
+            // Keep track of of files.
+            fileTracker($e);
 
             $e.parent()
                 .find('label')
@@ -103,9 +100,7 @@ const Authenticate = (() => {
             const $e = $(event.target);
             const default_text = $e.attr('data-placeholder');
             // Keep track of front and back sides of files.
-            const doc_type = ($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase();
-            const file_pos = ($e.attr('id').match(/file_(\d)/) || [])[1] || 0;
-            file_checks[doc_type][file_pos] = false;
+            fileTracker($e, false); // untrack files
             // Remove previously selected file and set the label
             $e.val('').parent().find('label').text(default_text)
                 .append($('<span/>', { class: 'add' }));
@@ -170,10 +165,12 @@ const Authenticate = (() => {
                 if (e.files && e.files.length) {
                     const $e = $(e);
                     const type = `${($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase()}`;
+                    const [str, id] = ($e.attr('id').match(/([a-z]+)_(\d)/) || []);
                     const $inputs = $e.closest('.fields').find('input[type="text"]');
                     const file_obj = {
                         file: e.files[0],
                         type,
+                        id,
                     };
                     if ($inputs.length) {
                         file_obj.id_number = $($inputs[0]).val();
@@ -214,7 +211,7 @@ const Authenticate = (() => {
                             expirationDate: f.exp_date || undefined,
                         };
 
-                        const error = { message: validate(obj) };
+                        const error = { message: validate(Object.assign(obj, {id: f.id})) };
                         if (error && error.message) reject(error);
 
                         resolve(obj);
@@ -233,52 +230,72 @@ const Authenticate = (() => {
             return Promise.all(promises);
         };
 
+        // Save file info to be used for validation and populating the file info
+        const fileTracker = ($ele, track=true) => {
+            const [str, id, pos]       = ($ele.attr('id').match(/([a-z]+)_(\d)/) || []);
+            if (track) {
+                file_checks[id]            = file_checks[id] || {};
+                file_checks[id].files      = file_checks[id].files || [];
+                file_checks[id].files[pos] = true;
+                file_checks[id].type      = $ele.attr('accept');
+                file_checks[id].label     = $ele.attr('data-name');
+            } else {
+                file_checks[id].files[pos] = false;
+            }
+        }
+
         // Validate user input
         const validate = (file) => {
-            const doc_name = {
-                passport      : localize('Passport'),
-                proofid       : localize('Identity card'),
-                driverslicense: localize('Driving licence'),
-            };
             // Add error messages here. Error messages are mapped by index to checks.
             const error_messages = [
-                localize('Invalid document format: "[_1]"', [file.documentFormat]),
-                localize('File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB', [file.filename]),
-                localize('ID number is required for [_1].', [doc_name[file.documentType]]),
-                localize('Only letters, numbers, space, underscore, and hyphen are allowed for ID number ([_1]).', [doc_name[file.documentType]]),
-                localize('Expiry date is required for [_1].', [doc_name[file.documentType]]),
-                localize('Front and reverse side photos of [_1] are required.', [doc_name.proofid]),
-                localize('Front and reverse side photos of [_1] are required.', [doc_name.driverslicense]),
+                localize('Invalid document format: "[_1]" for [_2]', [file.documentFormat, file_checks[file.id].label]),
+                localize('File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB', [file_checks[file.id].label]),
+                localize('ID number is required for [_1].', [file_checks[file.id].label]),
+                localize('Only letters, numbers, space, underscore, and hyphen are allowed for ID number ([_1]).', [file_checks[file.id].label]),
+                localize('Expiry date is required for [_1].', [file_checks[file.id].label]),
+                localize('Front and reverse side photos of [_1] are required.', [file_checks[file.id].label]),
+                // Japan Error message
+                localize('My number card is required.'),
             ];
-            const [format, file_size, id, id_format, expiry, proofid,
-                driverslicense] = validations(file);
+            const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,
+                // Japan validations
+                mynumbercard,
+            ] = validations(file);
             let message = '';
-            [format, file_size, id, id_format, expiry, proofid,
-                driverslicense,
+
+            [format, file_size, id, id_format, expiry, proofid, multiple_side_file_check,
+                // Japan validations
+                mynumbercard,
             ].forEach((e,i) => {
                 if (e) message+=`${error_messages[i]}<br />`;
             });
+
             return message;
         };
 
         // Add validations here.
         function* validations (file) {
+            const isJp = jpClient();
             const required_docs = ['passport', 'proofid', 'driverslicense'];
+            // Check if both front and back sides are selected for following file ids.
+            const multiple_side_file_ids = ['proofid', 'driverslicense', 'residencecard', 'mynumbercard', 'mynumberphotocard'];
             // Document format check
-            yield !(file.documentFormat || '').match(/^(PNG|JPG|JPEG|GIF|PDF)$/i);
-            // File size check
+            yield file_checks[file.id].type.indexOf(file.documentFormat.toLowerCase()) === -1;
+            // File size check. Max 3MB
             yield file.buffer && file.buffer.byteLength >= 3 * 1024 * 1024;
-            // ID check for docs.
-            yield !file.documentId && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
+            // ID check for docs. Only for non-japan clients
+            yield !isJp && !file.documentId && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
             // ID format check
             yield file.documentId && !/^[\w\s-]{0,30}$/.test(file.documentId);
-            // Expiration date check for docs.
-            yield !file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
-            // Check for proofid front and back side
-            yield file_checks.proofid && (file_checks.proofid[0] ^ file_checks.proofid[1]);// eslint-disable-line no-bitwise
-            // Check for driverslicense front and back side
-            yield file_checks.driverslicense && (file_checks.driverslicense[0] ^ file_checks.driverslicense[1]);// eslint-disable-line no-bitwise
+            // Expiration date check for docs. Only for non-japan clients
+            yield !isJp && !file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
+            // Check for front and back side
+            yield ~multiple_side_file_ids.indexOf(file.id) &&
+                (file_checks[file.id].files[0] ^ file_checks[file.id].files[1]);// eslint-disable-line no-bitwise
 
+            //Validations for japan
+            yield isJp && !((file_checks['mynumbercard'] && file_checks['mynumbercard'].files[0]) ||
+                (file_checks['mynumberphotocard'] && file_checks['mynumberphotocard'].files[0]));
         }
 
         const showError = (e) => {

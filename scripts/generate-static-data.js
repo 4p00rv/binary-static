@@ -585,7 +585,7 @@ const texts = [
     'Litecoin',
 
     // Authentication errors
-    'Invalid document format: "[_1]"',
+    'Invalid document format: "[_1]" for [_2]',
     'File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB',
     'ID number is required for [_1].',
     'Only letters, numbers, space, underscore, and hyphen are allowed for ID number.',
@@ -596,6 +596,7 @@ const texts = [
     'Front Side',
     'Reverse Side',
     'Front and reverse side photos of [_1] are required.',
+    'My number card is required.',
     '[_1]Your Proof of Identity or Proof of Address[_2] did not meet our requirements. Please check your email for further instructions.',
 ];
 
