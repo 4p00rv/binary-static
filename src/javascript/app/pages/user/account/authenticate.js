@@ -2,7 +2,7 @@ const DocumentUploader    = require('binary-document-uploader');
 const Client              = require('../../../base/client');
 const displayNotification = require('../../../base/header').displayNotification;
 const BinarySocket        = require('../../../base/socket');
-const jpClient           = require('../../../common/country_base').jpClient;
+const jpClient            = require('../../../common/country_base').jpClient;
 const localize            = require('../../../../_common/localize').localize;
 const Url                 = require('../../../../_common/url');
 const showLoadingImage    = require('../../../../_common/utility').showLoadingImage;
@@ -21,7 +21,7 @@ const Authenticate = (() => {
                         init();
                         $('#not_authenticated').setVisibility(1);
                         // Show upload instructions
-                        if(!jpClient()) {
+                        if (!jpClient()) {
                             $('.jp-show').setVisibility(1);
                         } else {
                             $('.jp-hide').setVisibility(1);
@@ -254,9 +254,9 @@ const Authenticate = (() => {
                 driverslicense] = validations(file);
             let message = '';
             [format, file_size, id, id_format, expiry, proofid,
-                driverslicense
+                driverslicense,
             ].forEach((e,i) => {
-                if(e) message+=`${error_messages[i]}<br />`;
+                if (e) message+=`${error_messages[i]}<br />`;
             });
             return message;
         };
