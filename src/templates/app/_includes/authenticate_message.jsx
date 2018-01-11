@@ -3,8 +3,8 @@ import SeparatorLine from '../../_common/components/separator_line.jsx';
 
 const File = ({
     document,
-    type = [".jpg", ".jpeg", ".gif", ".png", ".pdf"],
-    j
+    type = ['.jpg', '.jpeg', '.gif', '.png', '.pdf'],
+    j,
 }) => (
     <React.Fragment>
         <h3>{document.name}</h3>
@@ -139,7 +139,7 @@ const FileSelector = ({
 const AuthenticateMessage = () => (
     <React.Fragment>
         <p>{it.L('Authenticate your account by verifying your identity and address.')}</p>
-        <div className="invisible jp-hide">
+        <div className='invisible jp-hide'>
             <FileSelector
                 heading={it.L('1. Proof of identity')}
                 learn_more
@@ -181,7 +181,7 @@ const AuthenticateMessage = () => (
             />
         </div>
 
-        <div className="invisible jp-show">
+        <div className='invisible jp-show'>
             <FileSelector
                 heading={it.L('1. Photo ID')}
                 allowed_documents={[
@@ -215,23 +215,23 @@ const AuthenticateMessage = () => (
                 ]}
                 other_rows={[
                     {
-                        subHeading: 'And one of the below are compulsary',
+                        subHeading  : 'And one of the below are compulsary',
                         documentInfo: [
                             it.L('All pages of resident record (excluding family records and my-number)'),
                             it.L('Registered seal certificate'),
                             it.L('Utility bill (electricity, gas, and water)'),
                         ],
-                        documents: [
-                            {name: it.L('Resident records (all pages)'), value: 'other', input: false, labels: [it.L('All pages (pdf)')], type:['.pdf']},
+                        documents   : [
+                            {name: it.L('Resident records (all pages)'), value: 'other', input: false, labels: [it.L('All pages (pdf)')], type: ['.pdf']},
                             {name: it.L('Registered seal certificate'), value: 'other', input: false, labels: [it.L('Certificate')]},
                             {name: it.L('Utility bill (electricity, gas, and water)'), value: 'other', input: false, labels: [it.L('Bill')]},
                         ],
-                        requirements:[
+                        requirements: [
                             it.L('Must be a clear, colour photo or scanned image'), it.L('Minimum of six months validity'),
                             it.L('Only JPG, JPEG, GIF, PNG and PDF formats are accepted'),
                             it.L('Maximum upload size for each file is 3MB'),
                         ],
-                    }
+                    },
                 ]}
             />
 
