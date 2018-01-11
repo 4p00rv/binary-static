@@ -21,18 +21,18 @@ const Authenticate = (() => {
                         init();
                         $('#not_authenticated').setVisibility(1);
                         // Show upload instructions
-                        if(jpClient()) {
-
+                        if(!jpClient()) {
+                            $('.jp-show').setVisibility(1);
                         } else {
                             $('.jp-hide').setVisibility(1);
+                            let link = 'https://marketing.binary.com/authentication/2017_Authentication_Process.pdf';
+                            if (Client.isAccountOfType('financial')) {
+                                $('#not_authenticated_financial').setVisibility(1);
+                                link = 'https://marketing.binary.com/authentication/2017_MF_Authentication_Process.pdf';
+                            }
+                            $('#not_authenticated').find('.learn_more a').attr('href', link);
+                            $('#not_authenticated').find('.learn_more').setVisibility(1);
                         }
-                        let link = 'https://marketing.binary.com/authentication/2017_Authentication_Process.pdf';
-                        if (Client.isAccountOfType('financial')) {
-                            $('#not_authenticated_financial').setVisibility(1);
-                            link = 'https://marketing.binary.com/authentication/2017_MF_Authentication_Process.pdf';
-                        }
-                        $('#not_authenticated').find('.learn_more a').attr('href', link);
-                        $('#not_authenticated').find('.learn_more').setVisibility(1);
 
                     } else if (!/age_verification/.test(status)) {
                         $('#needs_age_verification').setVisibility(1);
@@ -77,13 +77,13 @@ const Authenticate = (() => {
             showSubmit();
             const $e = $(event.target);
             const file_name = event.target.files[0].name || '';
-            const display_name = file_name.length > 10 ? `${file_name.slice(0, 5)}..${file_name.slice(-5)}` : file_name;
+            const display_name = file_name.length > 20 ? `${file_name.slice(0, 10)}..${file_name.slice(-10)}` : file_name;
 
             // Keep track of front and back sides of files.
             const doc_type = ($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase();
-            const file_type = ($e.attr('id').match(/\D+/g) || [])[0];
-            file_checks[doc_type] = file_checks[doc_type] || {};
-            file_checks[doc_type][file_type] = true;
+            const file_pos = ($e.attr('id').match(/file_(\d)/) || [])[1] || 0;
+            file_checks[doc_type] = file_checks[doc_type] || [];
+            file_checks[doc_type][file_pos] = true;
 
             $e.parent()
                 .find('label')
@@ -104,8 +104,8 @@ const Authenticate = (() => {
             const default_text = $e.attr('data-placeholder');
             // Keep track of front and back sides of files.
             const doc_type = ($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase();
-            const file_type = ($e.attr('id').match(/\D+/g) || [])[0];
-            file_checks[doc_type][file_type] = false;
+            const file_pos = ($e.attr('id').match(/file_(\d)/) || [])[1] || 0;
+            file_checks[doc_type][file_pos] = false;
             // Remove previously selected file and set the label
             $e.val('').parent().find('label').text(default_text)
                 .append($('<span/>', { class: 'add' }));
@@ -235,43 +235,57 @@ const Authenticate = (() => {
 
         // Validate user input
         const validate = (file) => {
-            const required_docs = ['passport', 'proofid', 'driverslicense'];
             const doc_name = {
                 passport      : localize('Passport'),
                 proofid       : localize('Identity card'),
                 driverslicense: localize('Driving licence'),
             };
-
-            if (!(file.documentFormat || '').match(/^(PNG|JPG|JPEG|GIF|PDF)$/i)) {
-                return localize('Invalid document format: "[_1]"', [file.documentFormat]);
-            }
-            if (file.buffer && file.buffer.byteLength >= 3 * 1024 * 1024) {
-                return localize('File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB', [file.filename]);
-            }
-            if (!file.documentId && required_docs.indexOf(file.documentType.toLowerCase()) !== -1)  {
-                return localize('ID number is required for [_1].', [doc_name[file.documentType]]);
-            }
-            if (file.documentId && !/^[\w\s-]{0,30}$/.test(file.documentId)) {
-                return localize('Only letters, numbers, space, underscore, and hyphen are allowed for ID number ([_1]).', [doc_name[file.documentType]]);
-            }
-            if (!file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1) {
-                return localize('Expiry date is required for [_1].', [doc_name[file.documentType]]);
-            }
-            if (file_checks.proofid && (file_checks.proofid.front_file ^ file_checks.proofid.back_file)) { // eslint-disable-line no-bitwise
-                return localize('Front and reverse side photos of [_1] are required.', [doc_name.proofid]);
-            }
-            if (file_checks.driverslicense &&
-                (file_checks.driverslicense.front_file ^ file_checks.driverslicense.back_file)) { // eslint-disable-line no-bitwise
-                return localize('Front and reverse side photos of [_1] are required.', [doc_name.driverslicense]);
-            }
-            return null;
+            // Add error messages here. Error messages are mapped by index to checks.
+            const error_messages = [
+                localize('Invalid document format: "[_1]"', [file.documentFormat]),
+                localize('File ([_1]) size exceeds the permitted limit. Maximum allowed file size: 3MB', [file.filename]),
+                localize('ID number is required for [_1].', [doc_name[file.documentType]]),
+                localize('Only letters, numbers, space, underscore, and hyphen are allowed for ID number ([_1]).', [doc_name[file.documentType]]),
+                localize('Expiry date is required for [_1].', [doc_name[file.documentType]]),
+                localize('Front and reverse side photos of [_1] are required.', [doc_name.proofid]),
+                localize('Front and reverse side photos of [_1] are required.', [doc_name.driverslicense]),
+            ];
+            const [format, file_size, id, id_format, expiry, proofid,
+                driverslicense] = validations(file);
+            let message = '';
+            [format, file_size, id, id_format, expiry, proofid,
+                driverslicense
+            ].forEach((e,i) => {
+                if(e) message+=`${error_messages[i]}<br />`;
+            });
+            return message;
         };
+
+        // Add validations here.
+        function* validations (file) {
+            const required_docs = ['passport', 'proofid', 'driverslicense'];
+            // Document format check
+            yield !(file.documentFormat || '').match(/^(PNG|JPG|JPEG|GIF|PDF)$/i);
+            // File size check
+            yield file.buffer && file.buffer.byteLength >= 3 * 1024 * 1024;
+            // ID check for docs.
+            yield !file.documentId && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
+            // ID format check
+            yield file.documentId && !/^[\w\s-]{0,30}$/.test(file.documentId);
+            // Expiration date check for docs.
+            yield !file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
+            // Check for proofid front and back side
+            yield file_checks.proofid && (file_checks.proofid[0] ^ file_checks.proofid[1]);// eslint-disable-line no-bitwise
+            // Check for driverslicense front and back side
+            yield file_checks.driverslicense && (file_checks.driverslicense[0] ^ file_checks.driverslicense[1]);// eslint-disable-line no-bitwise
+
+        }
 
         const showError = (e) => {
             const $error = $('.error-msg');
             const message = e.message || e.message_to_client;
             enableButton();
-            $error.setVisibility(1).text(message);
+            $error.setVisibility(1).html(message);
             setTimeout(() => { $error.empty().setVisibility(0); }, 3000);
         };
 
