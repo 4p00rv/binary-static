@@ -221,7 +221,7 @@ const AuthenticateMessage = () => (
                             it.L('Registered seal certificate'),
                             it.L('Utility bill (electricity, gas, and water)'),
                         ],
-                        documents   : [
+                        documents: [
                             {name: it.L('Resident records (all pages)'), value: 'other', input: false, labels: [it.L('All pages (pdf)')], type: ['.pdf']},
                             {name: it.L('Registered seal certificate'), value: 'other', input: false, labels: [it.L('Certificate')]},
                             {name: it.L('Utility bill (electricity, gas, and water)'), value: 'other', input: false, labels: [it.L('Bill')]},
