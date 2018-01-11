@@ -165,7 +165,7 @@ const Authenticate = (() => {
                 if (e.files && e.files.length) {
                     const $e = $(e);
                     const type = `${($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase()}`;
-                    const [str, id] = ($e.attr('id').match(/([a-z]+)_(\d)/) || []);
+                    const [, id] = ($e.attr('id').match(/([a-z]+)_(\d)/) || []);
                     const $inputs = $e.closest('.fields').find('input[type="text"]');
                     const file_obj = {
                         file: e.files[0],
@@ -232,7 +232,7 @@ const Authenticate = (() => {
 
         // Save file info to be used for validation and populating the file info
         const fileTracker = ($ele, track=true) => {
-            const [str, id, pos]       = ($ele.attr('id').match(/([a-z]+)_(\d)/) || []);
+            const [, id, pos]       = ($ele.attr('id').match(/([a-z]+)_(\d)/) || []);
             if (track) {
                 file_checks[id]            = file_checks[id] || {};
                 file_checks[id].files      = file_checks[id].files || [];
@@ -242,7 +242,7 @@ const Authenticate = (() => {
             } else {
                 file_checks[id].files[pos] = false;
             }
-        }
+        };
 
         // Validate user input
         const validate = (file) => {
@@ -290,12 +290,12 @@ const Authenticate = (() => {
             // Expiration date check for docs. Only for non-japan clients
             yield !isJp && !file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
             // Check for front and back side
-            yield ~multiple_side_file_ids.indexOf(file.id) &&
+            yield multiple_side_file_ids.indexOf(file.id) !== -1 &&
                 (file_checks[file.id].files[0] ^ file_checks[file.id].files[1]);// eslint-disable-line no-bitwise
 
-            //Validations for japan
-            yield isJp && !((file_checks['mynumbercard'] && file_checks['mynumbercard'].files[0]) ||
-                (file_checks['mynumberphotocard'] && file_checks['mynumberphotocard'].files[0]));
+            // Validations for japan
+            yield isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
+                (file_checks.mynumberphotocard && file_checks.mynumberphotocard.files[0]));
         }
 
         const showError = (e) => {
