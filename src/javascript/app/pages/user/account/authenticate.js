@@ -21,10 +21,7 @@ const Authenticate = (() => {
                         init();
                         $('#not_authenticated').setVisibility(1);
                         // Show upload instructions
-                        if (jpClient()) {
-                            $('.jp-show').setVisibility(1);
-                        } else {
-                            $('.jp-hide').setVisibility(1);
+                        if (!jpClient()) {
                             let link = 'https://marketing.binary.com/authentication/2017_Authentication_Process.pdf';
                             if (Client.isAccountOfType('financial')) {
                                 $('#not_authenticated_financial').setVisibility(1);

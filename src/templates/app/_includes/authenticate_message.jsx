@@ -140,7 +140,7 @@ const FileSelector = ({
 const AuthenticateMessage = () => (
     <React.Fragment>
         <p>{it.L('Authenticate your account by verifying your identity and address.')}</p>
-        <div className='invisible jp-hide'>
+        <div className='ja-hide'>
             <FileSelector
                 heading={it.L('1. Proof of identity')}
                 learn_more
@@ -182,7 +182,7 @@ const AuthenticateMessage = () => (
             />
         </div>
 
-        <div className='invisible jp-show'>
+        <div className='invisible ja-show'>
             <FileSelector
                 heading={it.L('1. Photo ID')}
                 allowed_documents={[

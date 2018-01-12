@@ -33,7 +33,7 @@ module.exports = [
     ['resources/market_timesws',           'app/resources/trading_times',               'default',    'Trading Times'],
 
     ['user/accounts',                      'app/user/accounts',                         'default',    'Accounts',                          'ja'],
-    ['user/authenticate',                  'app/user/authenticate',                     'default',    'Authenticate',                      'ja'],
+    ['user/authenticate',                  'app/user/authenticate',                     'default',    'Authenticate'],
     ['user/ico-claim-form',                'app/user/ico_claim_form',                   'default',    'Electronic Subscription Form for Tokens', 'ja'],
     ['user/ico-subscribe',                 'app/user/ico_subscribe',                    'default',    'Subscribe to ICO',                  'ja'],
     ['user/lost_passwordws',               'app/user/lost_password',                    'default',    'Password Reset'],
