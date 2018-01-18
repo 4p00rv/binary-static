@@ -216,7 +216,7 @@ const AuthenticateMessage = () => (
                 ]}
                 other_rows={[
                     {
-                        subHeading  : 'And one of the below are compulsary',
+                        subHeading  : 'And one of the below are compulsory',
                         documentInfo: [
                             it.L('All pages of resident record (excluding family records and my-number)'),
                             it.L('Registered seal certificate'),
@@ -239,7 +239,7 @@ const AuthenticateMessage = () => (
             <SeparatorLine className='gr-padding-10' invisible />
 
             <FileSelector
-                heading={it.L('3. My number card (compulsary)')}
+                heading={it.L('3. My number card (compulsory)')}
                 allowed_documents={[
                     it.L('My number non-photo ID card'),
                     it.L('My number photo ID card'),

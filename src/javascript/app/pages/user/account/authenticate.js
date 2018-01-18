@@ -253,7 +253,7 @@ const Authenticate = (() => {
                 localize('Front and reverse side photos of [_1] are required.', [file_checks[file.id].label]),
                 // Japan Error message
                 localize('My number card is required.'),
-                localize('Please select at least one file from section 1 or 2.'),
+                localize('Please select at least one file from section 1 or two different file types from section 2.'),
                 localize('One of [_1] or [_2] is required.', [localize('Medical insurance card'), localize('Pension book')]),
                 localize('One of [_1], [_2] or [_3] is required.', [localize('Resident records'),
                     localize('Registered seal certificate'), localize('Utility bill')]),
