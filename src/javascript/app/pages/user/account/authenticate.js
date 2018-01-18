@@ -254,17 +254,19 @@ const Authenticate = (() => {
                 // Japan Error message
                 localize('My number card is required.'),
                 localize('Please select at least one file from section 1 or 2.'),
-                localize('Please select at least two different file types from section 2.'),
+                localize('One of [_1] or [_2] is required.', [localize('Medical insurance card'), localize('Pension book')]),
+                localize('One of [_1], [_2] or [_3] is required.', [localize('Resident records'),
+                    localize('Registered seal certificate'), localize('Utility bill')]),
             ];
             const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_checks,
+                mynumbercard, other_files, section_2_0_check, section_2_1_check,
             ] = validations(file);
             let message = '';
 
             [format, file_size, id, id_format, expiry, proofid, multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_checks,
+                mynumbercard, other_files, section_2_0_check, section_2_1_check,
             ].forEach((e,i) => {
                 if (e) message+=`${error_messages[i]}<br />`;
             });
@@ -306,7 +308,9 @@ const Authenticate = (() => {
             yield isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
             // Check if both files are selected for section 2
             yield isJp && noneOfthese(...jp_section_1)
-                && (noneOfthese(...jp_section_2_0) || noneOfthese(...jp_section_2_1));
+                && (noneOfthese(...jp_section_2_0) && !noneOfthese(...jp_section_2_1));
+            yield isJp && noneOfthese(...jp_section_1)
+                && (!noneOfthese(...jp_section_2_0) && noneOfthese(...jp_section_2_1));
         }
 
         const showError = (e) => {
