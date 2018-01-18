@@ -254,17 +254,17 @@ const Authenticate = (() => {
                 // Japan Error message
                 localize('My number card is required.'),
                 localize('Please select at least one file from section 1 or 2.'),
-                localize('Please select at least two different file types from section 2.')
+                localize('Please select at least two different file types from section 2.'),
             ];
             const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_checks
+                mynumbercard, other_files, section_2_checks,
             ] = validations(file);
             let message = '';
 
             [format, file_size, id, id_format, expiry, proofid, multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_checks
+                mynumbercard, other_files, section_2_checks,
             ].forEach((e,i) => {
                 if (e) message+=`${error_messages[i]}<br />`;
             });
@@ -283,9 +283,8 @@ const Authenticate = (() => {
             const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard_1'];
             const jp_section_2_0 = ['insurancecard', 'pensionbook'];
             const jp_section_2_1 = ['residentrecords', 'sealcertificate', 'proofaddress'];
-            const noneOfthese = (...args) => (args.reduce((a,b) => {
-                return a && !(file_checks[b] && file_checks[b].files[0]);
-            }, true));
+            const noneOfthese = (...args) => (args.reduce(
+                (a,b) => a && !(file_checks[b] && file_checks[b].files[0]), true));
             // Document format check
             yield file_checks[file.id].type.indexOf(file.documentFormat.toLowerCase()) === -1;
             // File size check. Max 3MB
@@ -306,7 +305,8 @@ const Authenticate = (() => {
             // Check if one of the section 1&2 is file selected
             yield isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
             // Check if both files are selected for section 2
-            yield isJp && noneOfthese(...jp_section_1) && (noneOfthese(...jp_section_2_0) || noneOfthese(...jp_section_2_1));
+            yield isJp && noneOfthese(...jp_section_1)
+                && (noneOfthese(...jp_section_2_0) || noneOfthese(...jp_section_2_1));
         }
 
         const showError = (e) => {

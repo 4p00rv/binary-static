@@ -94,7 +94,7 @@ const KnowledgeTestUI = (() => {
 
         const $date_row = $('<tr/>').append($('<td/>', { text: localize('Date') })).append($('<td/>', { text: submit_date }));
 
-        const $authenticate_button = $(`<a />`, {class: 'button', href: urlFor('/user/authenticate')}).append($('<span/>', {text: localize('Authenticate')}));
+        const $authenticate_button = $('<a />', {class: 'button', href: urlFor('/user/authenticate')}).append($('<span/>', {text: localize('Authenticate')}));
 
         $result_table.append($score_row).append($date_row).append($authenticate_button);
 
