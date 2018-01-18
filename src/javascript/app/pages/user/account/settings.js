@@ -16,6 +16,9 @@ const Settings = (() => {
                 $class_real.not((is_jp ? '.ja-hide' : '')).setVisibility(1);
             }
 
+            // Show ja-show options
+            $(is_jp ? '.ja-show' : '').setVisibility(1);
+
             const get_account_status = getPropertyValue(response, 'get_account_status');
             const status             = getPropertyValue(get_account_status, 'status');
             if (!/social_signup/.test(status)) {

@@ -162,7 +162,7 @@ const Authenticate = (() => {
                 if (e.files && e.files.length) {
                     const $e = $(e);
                     const type = `${($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase()}`;
-                    const [, id] = ($e.attr('id').match(/([a-z]+)_(\d)/) || []);
+                    const [, id] = ($e.attr('id').match(/([a-z\d]+)_(\d)/) || []);
                     const $inputs = $e.closest('.fields').find('input[type="text"]');
                     const file_obj = {
                         file: e.files[0],
@@ -229,7 +229,7 @@ const Authenticate = (() => {
 
         // Save file info to be used for validation and populating the file info
         const fileTracker = ($ele, track=true) => {
-            const [, id, pos]       = ($ele.attr('id').match(/([a-z]+)_(\d)/) || []);
+            const [, id, pos]       = ($ele.attr('id').match(/([a-z\d]+)_(\d)/) || []);
             if (track) {
                 file_checks[id]            = file_checks[id] || {};
                 file_checks[id].files      = file_checks[id].files || [];
@@ -280,7 +280,7 @@ const Authenticate = (() => {
             const multiple_side_file_ids = ['proofid', 'driverslicense', 'residencecard', 'mynumbercard', 'mynumberphotocard'];
             // Japan Only
             // check if one of the following files is selected.
-            const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard_1'];
+            const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard1'];
             const jp_section_2_0 = ['insurancecard', 'pensionbook'];
             const jp_section_2_1 = ['residentrecords', 'sealcertificate', 'proofaddress'];
             const noneOfthese = (...args) => (args.reduce(

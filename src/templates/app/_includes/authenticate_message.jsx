@@ -198,7 +198,7 @@ const AuthenticateMessage = () => (
                 accepted_documents={[
                     { name: it.L('Driving licence'), value: 'driverslicense', id: 'driverslicense', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
                     { name: it.L('Residence card'), value: 'other', id: 'residencecard', input: false, labels: [it.L('Front Side'), it.L('Reverse Side')] },
-                    { name: it.L('My number photo ID card'), value: 'other', id: 'mynumberphotocard_1', input: false, labels: [it.L('Front Side')] },
+                    { name: it.L('My number photo ID card'), value: 'other', id: 'mynumberphotocard1', input: false, labels: [it.L('Front Side')] },
                 ]}
             />
 
