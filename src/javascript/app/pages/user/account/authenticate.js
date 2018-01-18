@@ -253,16 +253,18 @@ const Authenticate = (() => {
                 localize('Front and reverse side photos of [_1] are required.', [file_checks[file.id].label]),
                 // Japan Error message
                 localize('My number card is required.'),
+                localize('Please select at least one file from section 1 or 2.'),
+                localize('Please select at least two different file types from section 2.')
             ];
             const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,
                 // Japan validations
-                mynumbercard,
+                mynumbercard, other_files, section_2_checks
             ] = validations(file);
             let message = '';
 
             [format, file_size, id, id_format, expiry, proofid, multiple_side_file_check,
                 // Japan validations
-                mynumbercard,
+                mynumbercard, other_files, section_2_checks
             ].forEach((e,i) => {
                 if (e) message+=`${error_messages[i]}<br />`;
             });
@@ -276,6 +278,14 @@ const Authenticate = (() => {
             const required_docs = ['passport', 'proofid', 'driverslicense'];
             // Check if both front and back sides are selected for following file ids.
             const multiple_side_file_ids = ['proofid', 'driverslicense', 'residencecard', 'mynumbercard', 'mynumberphotocard'];
+            // Japan Only
+            // check if one of the following files is selected.
+            const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard_1'];
+            const jp_section_2_0 = ['insurancecard', 'pensionbook'];
+            const jp_section_2_1 = ['residentrecords', 'sealcertificate', 'proofaddress'];
+            const noneOfthese = (...args) => (args.reduce((a,b) => {
+                return a && !(file_checks[b] && file_checks[b].files[0]);
+            }, true));
             // Document format check
             yield file_checks[file.id].type.indexOf(file.documentFormat.toLowerCase()) === -1;
             // File size check. Max 3MB
@@ -293,6 +303,10 @@ const Authenticate = (() => {
             // Validations for japan
             yield isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
                 (file_checks.mynumberphotocard && file_checks.mynumberphotocard.files[0]));
+            // Check if one of the section 1&2 is file selected
+            yield isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
+            // Check if both files are selected for section 2
+            yield isJp && noneOfthese(...jp_section_1) && (noneOfthese(...jp_section_2_0) || noneOfthese(...jp_section_2_1));
         }
 
         const showError = (e) => {

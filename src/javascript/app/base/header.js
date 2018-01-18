@@ -332,7 +332,7 @@ const Header = (() => {
                 if (!notified) hideNotification();
             };
 
-            if (Client.get('is_virtual')) {
+            if (Client.get('is_virtual') && !jpClient()) {
                 checkStatus(check_statuses_virtual);
             } else {
                 BinarySocket.wait('website_status', 'get_account_status', 'get_settings', 'balance').then(() => {
