@@ -6,7 +6,7 @@ const getPropertyValue = require('../../../../_common/utility').getPropertyValue
 
 const Settings = (() => {
     const onLoad = () => {
-        BinarySocket.wait('get_account_status').then((response) => {
+        BinarySocket.wait('get_account_status', 'get_settings').then(() => {
             const $class_real = $('.real');
             const is_jp       = jpClient();
 
@@ -19,7 +19,8 @@ const Settings = (() => {
             // Show ja-show options
             $(is_jp ? '.ja-show' : '').setVisibility(1);
 
-            const get_account_status = getPropertyValue(response, 'get_account_status');
+            const get_settings       = State.getResponse('get_settings');
+            const get_account_status = State.getResponse('get_account_status');
             const status             = getPropertyValue(get_account_status, 'status');
             if (!/social_signup/.test(status)) {
                 $('#change_password').setVisibility(1);
@@ -36,7 +37,8 @@ const Settings = (() => {
                 }
             }
 
-            if (!get_account_status.prompt_client_to_authenticate) {
+            if (!get_account_status.prompt_client_to_authenticate
+                || !get_settings.jp_account_status || /jp_knowledge_test_(pending|fail)/.test(get_settings.jp_account_status.status)) {
                 $('#authenticate').setVisibility(0);
             }
 

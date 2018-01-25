@@ -28,8 +28,7 @@ const Authenticate = (() => {
                                 $('#not_authenticated_financial').setVisibility(1);
                                 link = 'https://marketing.binary.com/authentication/2017_MF_Authentication_Process.pdf';
                             }
-                            $('#not_authenticated').find('.learn_more a').attr('href', link);
-                            $('#not_authenticated').find('.learn_more').setVisibility(1);
+                            $not_authenticated.find('.learn_more a').attr('href', link);
                         }
 
                     } else if (!/age_verification/.test(status)) {

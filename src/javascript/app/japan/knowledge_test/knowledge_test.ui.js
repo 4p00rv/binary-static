@@ -96,7 +96,11 @@ const KnowledgeTestUI = (() => {
 
         const $authenticate_button = $('<a />', {class: 'button', href: urlFor('/user/authenticate')}).append($('<span/>', {text: localize('Authenticate')}));
 
-        $result_table.append($score_row).append($date_row).append($authenticate_button);
+        $result_table.append($score_row).append($date_row);
+
+        if (score >= 14) { // passsing score.
+            $result_table.append($authenticate_button);
+        }
 
         return $result_table;
     };
