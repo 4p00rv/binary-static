@@ -158,18 +158,11 @@ const Header = (() => {
                 });
             };
 
-<<<<<<< HEAD
             const jp_account_status  = State.getResponse('get_settings.jp_account_status.status');
             const get_account_status = State.getResponse('get_account_status') || {};
             const upgrade_info       = Client.getUpgradeInfo();
             const show_upgrade_msg   = upgrade_info.can_upgrade;
             const virtual_text       = document.getElementById('virtual-text');
-=======
-            const jp_account_status = State.getResponse('get_settings.jp_account_status.status');
-            const upgrade_info      = Client.getUpgradeInfo();
-            const show_upgrade_msg  = upgrade_info.can_upgrade;
-            const virtual_text      = getElementById('virtual-text');
->>>>>>> 8971d185b2ba3b69375c271509ca8fbc2a770c3e
 
             if (Client.get('is_virtual')) {
                 applyToAllElements(upgrade_msg, (el) => {
