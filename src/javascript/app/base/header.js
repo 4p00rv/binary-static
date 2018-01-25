@@ -164,10 +164,11 @@ const Header = (() => {
                 });
             };
 
-            const jp_account_status = State.getResponse('get_settings.jp_account_status.status');
-            const upgrade_info      = Client.getUpgradeInfo();
-            const show_upgrade_msg  = upgrade_info.can_upgrade;
-            const virtual_text      = document.getElementById('virtual-text');
+            const jp_account_status  = State.getResponse('get_settings.jp_account_status.status');
+            const get_account_status = State.getResponse('get_account_status') || {};
+            const upgrade_info       = Client.getUpgradeInfo();
+            const show_upgrade_msg   = upgrade_info.can_upgrade;
+            const virtual_text       = document.getElementById('virtual-text');
 
             if (Client.get('is_virtual')) {
                 applyToAllElements(upgrade_msg, (el) => {
@@ -183,6 +184,8 @@ const Header = (() => {
                     const has_disabled_jp = jpClient() && Client.getAccountOfType('real').is_disabled;
                     if (/jp_knowledge_test_(pending|fail)/.test(jp_account_status)) { // do not show upgrade for user that filled up form
                         showUpgrade('/new_account/knowledge_testws', '{JAPAN ONLY}Take knowledge test');
+                    } else if (get_account_status.prompt_client_to_authenticate) {
+                        displayAccountStatus();
                     } else if (show_upgrade_msg || (has_disabled_jp && jp_account_status !== 'disabled')) {
                         applyToAllElements(upgrade_msg, (el) => { el.setVisibility(1); });
                         if (!virtual_text) {
@@ -268,6 +271,7 @@ const Header = (() => {
     const displayAccountStatus = () => {
         BinarySocket.wait('authorize').then(() => {
             let get_account_status,
+                get_settings,
                 status;
 
             const riskAssessment = () => (
@@ -291,7 +295,8 @@ const Header = (() => {
             };
 
             const validations = {
-                authenticate         : () => +get_account_status.prompt_client_to_authenticate,
+                authenticate         : () => (+get_account_status.prompt_client_to_authenticate && !jpClient())
+                    || (jpClient() && +get_account_status.prompt_client_to_authenticate && get_settings.jp_account_status && !/jp_knowledge_test_(pending|fail)/.test(get_settings.jp_account_status.status)),
                 currency             : () => !Client.get('currency'),
                 document_needs_action: () => /document_needs_action/.test(status),
                 document_review      : () => /document_under_review/.test(status),
@@ -337,6 +342,7 @@ const Header = (() => {
             } else {
                 BinarySocket.wait('website_status', 'get_account_status', 'get_settings', 'balance').then(() => {
                     get_account_status = State.getResponse('get_account_status') || {};
+                    get_settings       = State.getResponse('get_settings');
                     status             = get_account_status.status;
                     checkStatus(check_statuses_real);
                 });
