@@ -2,7 +2,6 @@ const Client           = require('../../../base/client');
 const BinarySocket     = require('../../../base/socket');
 const jpClient         = require('../../../common/country_base').jpClient;
 const State            = require('../../../../_common/storage').State;
-const getPropertyValue = require('../../../../_common/utility').getPropertyValue;
 
 const Settings = (() => {
     const onLoad = () => {
@@ -21,7 +20,7 @@ const Settings = (() => {
 
             const get_settings       = State.getResponse('get_settings');
             const get_account_status = State.getResponse('get_account_status');
-            const status             = getPropertyValue(get_account_status, 'status');
+            const status             = State.getResponse('get_account_status.status');
             if (!/social_signup/.test(status)) {
                 $('#change_password').setVisibility(1);
             }
