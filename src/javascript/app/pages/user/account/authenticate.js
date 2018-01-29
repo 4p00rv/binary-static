@@ -241,10 +241,10 @@ const Authenticate = (() => {
                 localize('Expiry date is required for [_1].', [file_checks[file.id].label]),
                 localize('Front and reverse side photos of [_1] are required.', [file_checks[file.id].label]),
                 // Japan Error message
-                localize('My number card is required.'),
-                localize('Please select at least one file from section 1 or two different file types from section 2.'),
-                localize('One of [_1] or [_2] is required.', [localize('Medical insurance card'), localize('Pension book')]),
-                localize('One of [_1], [_2] or [_3] is required.', [localize('Resident records'),
+                localize('{JAPAN ONLY}My number card is required.'),
+                localize('{JAPAN ONLY}Please select at least one file from section 1 or two different file types from section 2.'),
+                localize('{JAPAN ONLY}One of [_1] or [_2] is required.', [localize('Medical insurance card'), localize('Pension book')]),
+                localize('{JAPAN ONLY}One of [_1], [_2] or [_3] is required.', [localize('Resident records'),
                     localize('Registered seal certificate'), localize('Utility bill')]),
             ];
             const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,

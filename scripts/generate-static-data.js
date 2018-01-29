@@ -607,9 +607,10 @@ const texts = [
     'Front Side',
     'Reverse Side',
     'Front and reverse side photos of [_1] are required.',
-    'My number card is required.',
-    'Please select at least one file from section 1 or two different file types from section 2.',
-    'Please select at least two different file types from section 2.',
+    '{JAPAN ONLY}My number card is required.',
+    '{JAPAN ONLY}One of [_1] or [_2] is required.',
+    '{JAPAN ONLY}One of [_1], [_2] or [_3] is required.',
+    '{JAPAN ONLY}Please select at least one file from section 1 or two different file types from section 2.',
     '[_1]Your Proof of Identity or Proof of Address[_2] did not meet our requirements. Please check your email for further instructions.',
 ];
 
