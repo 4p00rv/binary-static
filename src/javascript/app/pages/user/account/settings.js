@@ -36,8 +36,7 @@ const Settings = (() => {
                 }
             }
 
-            if (!get_account_status.prompt_client_to_authenticate
-                || !get_settings.jp_account_status || /jp_knowledge_test_(pending|fail)/.test(get_settings.jp_account_status.status)) {
+            if (!get_account_status.prompt_client_to_authenticate) {
                 $('#authenticate').setVisibility(0);
             }
 

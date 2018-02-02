@@ -280,8 +280,7 @@ const Header = (() => {
             };
 
             const validations = {
-                authenticate: () => (+get_account_status.prompt_client_to_authenticate && !jpClient())
-                    || (jpClient() && +get_account_status.prompt_client_to_authenticate && get_settings.jp_account_status && !/jp_knowledge_test_(pending|fail)/.test(get_settings.jp_account_status.status)),
+                authenticate         : () => +get_account_status.prompt_client_to_authenticate,
                 currency             : () => !Client.get('currency'),
                 document_needs_action: () => /document_needs_action/.test(status),
                 document_review      : () => /document_under_review/.test(status),
