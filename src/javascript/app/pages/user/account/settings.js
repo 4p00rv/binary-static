@@ -18,7 +18,6 @@ const Settings = (() => {
             // Show ja-show options
             $(is_jp ? '.ja-show' : '').setVisibility(1);
 
-            const get_settings       = State.getResponse('get_settings');
             const get_account_status = State.getResponse('get_account_status');
             const status             = State.getResponse('get_account_status.status');
             if (!/social_signup/.test(status)) {

@@ -256,7 +256,6 @@ const Header = (() => {
     const displayAccountStatus = () => {
         BinarySocket.wait('authorize').then(() => {
             let get_account_status,
-                get_settings,
                 status;
 
             const riskAssessment = () => (
@@ -326,7 +325,6 @@ const Header = (() => {
             } else {
                 BinarySocket.wait('website_status', 'get_account_status', 'get_settings', 'balance').then(() => {
                     get_account_status = State.getResponse('get_account_status') || {};
-                    get_settings       = State.getResponse('get_settings');
                     status             = get_account_status.status;
                     checkStatus(check_statuses_real);
                 });
