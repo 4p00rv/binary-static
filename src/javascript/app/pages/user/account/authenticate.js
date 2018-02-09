@@ -273,7 +273,7 @@ const Authenticate = (() => {
             // check if one of the following files is selected.
             const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard1'];
             const jp_section_2_0 = ['insurancecard', 'pensionbook'];
-            const jp_section_2_1 = ['residentrecords', 'sealcertificate', 'proofaddress'];
+            const jp_section_2_1 = ['residentrecords', 'sealcertificate', 'utilitybill'];
             const noneOfthese = (...args) => (args.reduce(
                 (a,b) => a && !(file_checks[b] && file_checks[b].files[0]), true));
             // Document format check
