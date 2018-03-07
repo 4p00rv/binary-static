@@ -9,45 +9,45 @@ const File = ({
     <React.Fragment>
         <h3>{document.name}</h3>
         <div className='fields'>
-                {document.input ? (
-                        <React.Fragment>
-                            <div className='gr-row form-row center-text-m'>
-                                <div className='gr-4 gr-12-m'>
-                                    <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
-                                </div>
-                                <div className='gr-8 gr-12-m'>
-                                    <input id={`id_number_${j}`} type='text' maxLength='30' />
-                                </div>
-                            </div>
-                            <div className='gr-row form-row center-text-m'>
-                                <div className='gr-4 gr-12-m'>
-                                    <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
-                                </div>
-                                <div className='gr-8 gr-12-m'>
-                                    <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
-                                </div>
-                            </div>
-                        </React.Fragment>
+            {document.input ? (
+                <React.Fragment>
+                    <div className='gr-row form-row center-text-m'>
+                        <div className='gr-4 gr-12-m'>
+                            <label htmlFor={`id_number_${j}`}>{it.L('ID number')}:</label>
+                        </div>
+                        <div className='gr-8 gr-12-m'>
+                            <input id={`id_number_${j}`} type='text' maxLength='30' />
+                        </div>
+                    </div>
+                    <div className='gr-row form-row center-text-m'>
+                        <div className='gr-4 gr-12-m'>
+                            <label htmlFor={`exp_date_${j}`}>{it.L('Expiry date')}:</label>
+                        </div>
+                        <div className='gr-8 gr-12-m'>
+                            <input className='date-picker' id={`exp_date_${j}`} type='text' maxLength='200' readOnly='true' />
+                        </div>
+                    </div>
+                </React.Fragment>
                 ) : null }
-                <div className='gr-row form-row center-text-m'>
-                    {document.labels.map((file, k) => {
-                        const id = Math.floor(Math.random() * 10**10);
-                        return (
-                            <div className='gr-12' key={k}>
-                                <input
-                                    id={`${document.id}_${k}_${id}`}
-                                    data-placeholder={file}
-                                    data-name={document.name}
-                                    className='file-picker'
-                                    type='file'
-                                    accept={type.join(', ')}
-                                    data-type={document.value}
-                                />
-                                <label htmlFor={`${document.id}_${k}_${id}`} className='button'>{file} <span className='add' /></label>
-                            </div>
-                        );
-                    })}
-                </div>
+            <div className='gr-row form-row center-text-m'>
+                {document.labels.map((file, k) => {
+                    const id = Math.floor(Math.random() * 10**10);
+                    return (
+                        <div className='gr-12' key={k}>
+                            <input
+                                id={`${document.id}_${k}_${id}`}
+                                data-placeholder={file}
+                                data-name={document.name}
+                                className='file-picker'
+                                type='file'
+                                accept={type.join(', ')}
+                                data-type={document.value}
+                            />
+                            <label htmlFor={`${document.id}_${k}_${id}`} className='button'>{file} <span className='add' /></label>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     </React.Fragment>
 );
