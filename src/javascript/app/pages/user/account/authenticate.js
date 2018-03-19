@@ -8,12 +8,15 @@ const Url                 = require('../../../../_common/url');
 const showLoadingImage    = require('../../../../_common/utility').showLoadingImage;
 
 const Authenticate = (() => {
+    let needs_action = false;
+
     const onLoad = () => {
         BinarySocket.send({ get_account_status: 1 }).then((response) => {
             if (response.error) {
                 $('#error_message').setVisibility(1).text(response.error.message);
             } else {
                 const status = response.get_account_status.status;
+                needs_action = /document_needs_action/.test(response.get_account_status.status);
                 if (!/authenticated/.test(status)) {
                     init();
                     const $not_authenticated = $('#not_authenticated').setVisibility(1);
@@ -39,8 +42,8 @@ const Authenticate = (() => {
             collapsible: true,
             active     : false,
         });
-        // Setup Date picker
         const file_checks = {};
+        // Setup Date picker
         $('.date-picker').datepicker({
             dateFormat : 'yy-mm-dd',
             changeMonth: true,
@@ -65,9 +68,6 @@ const Authenticate = (() => {
             const file_name = event.target.files[0].name || '';
             const display_name = file_name.length > 20 ? `${file_name.slice(0, 10)}...${file_name.slice(-10)}` : file_name;
 
-            // Keep track of of files.
-            fileTracker($e);
-
             $e.parent()
                 .find('label')
                 .off('click')
@@ -84,10 +84,8 @@ const Authenticate = (() => {
         // Reset file-selector label
         const resetLabel = (event) => {
             const $e = $(event.target);
+            fileTracker($e, false);
             const default_text = $e.attr('data-placeholder');
-            // Keep track of front and back sides of files.
-            fileTracker($e, false); // untrack files
-            // Remove previously selected file and set the label
             $e.val('').parent().find('label').text(default_text)
                 .append($('<span/>', { class: 'add' }));
             // Change submit button state
@@ -152,16 +150,19 @@ const Authenticate = (() => {
                     const $e = $(e);
                     const type = `${($e.attr('data-type') || '').replace(/\s/g, '_').toLowerCase()}`;
                     const [, id] = ($e.attr('id').match(/([a-z\d]+)_(\d)/) || []);
+                    const name = $e.attr('data-name');
                     const $inputs = $e.closest('.fields').find('input[type="text"]');
                     const file_obj = {
                         file: e.files[0],
                         type,
                         id,
+                        name,
                     };
                     if ($inputs.length) {
                         file_obj.id_number = $($inputs[0]).val();
                         file_obj.exp_date = $($inputs[1]).val();
                     }
+                    fileTracker($e, true);
                     files.push(file_obj);
                 }
             });
@@ -175,7 +176,7 @@ const Authenticate = (() => {
             readFiles(files).then((objects) => {
                 objects.forEach(obj => promises.push(uploader.upload(obj)));
                 Promise.all(promises)
-                    .then(() => showSuccess())
+                    .then(onResponse)
                     .catch(showError);
             }).catch(showError);
         };
@@ -195,6 +196,10 @@ const Authenticate = (() => {
                             documentFormat: format,
                             documentId    : f.id_number || undefined,
                             expirationDate: f.exp_date || undefined,
+                            passthrough   : {
+                                filename: f.file.name,
+                                name    : f.name,
+                            },
                         };
 
                         const error = { message: validate(Object.assign(obj, {id: f.id})) };
@@ -216,10 +221,10 @@ const Authenticate = (() => {
             return Promise.all(promises);
         };
 
-        // Save file info to be used for validation and populating the file info
-        const fileTracker = ($ele, track=true) => {
+        const fileTracker = ($ele, selected) => {
             const [, id, pos]       = ($ele.attr('id').match(/([a-z\d]+)_(\d)/) || []);
-            if (track) {
+            // Keep track of front and back sides of files.
+            if (selected) {
                 file_checks[id]            = file_checks[id] || {};
                 file_checks[id].files      = file_checks[id].files || [];
                 file_checks[id].files[pos] = true;
@@ -287,18 +292,18 @@ const Authenticate = (() => {
             // Expiration date check for docs. Only for non-japan clients
             yield !isJp && !file.expirationDate && required_docs.indexOf(file.documentType.toLowerCase()) !== -1;
             // Check for front and back side
-            yield multiple_side_file_ids.indexOf(file.id) !== -1 &&
+            yield !needs_action && multiple_side_file_ids.indexOf(file.id) !== -1 &&
                 (file_checks[file.id].files[0] ^ file_checks[file.id].files[1]);// eslint-disable-line no-bitwise
 
             // Validations for japan
-            yield isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
+            yield !needs_action && isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
                 (file_checks.mynumberphotocard && file_checks.mynumberphotocard.files[0]));
             // Check if one of the section 1&2 is file selected
-            yield isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
+            yield !needs_action && isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
             // Check if both files are selected for section 2
-            yield isJp && noneOfthese(...jp_section_1)
+            yield !needs_action && isJp && noneOfthese(...jp_section_1)
                 && (noneOfthese(...jp_section_2_0) && !noneOfthese(...jp_section_2_1));
-            yield isJp && noneOfthese(...jp_section_1)
+            yield !needs_action && isJp && noneOfthese(...jp_section_1)
                 && (!noneOfthese(...jp_section_2_0) && noneOfthese(...jp_section_2_1));
         }
 
@@ -316,6 +321,24 @@ const Authenticate = (() => {
             displayNotification(msg, false, 'document_under_review');
             $('#not_authenticated, #not_authenticated_financial').setVisibility(0); // Just hide it
             $('#success-message').setVisibility(1);
+        };
+
+        const onResponse = (res) => {
+            const dup_files = [];
+            let successAny = false;
+            res.forEach((file) => {
+                const passthrough = file.passthrough;
+                if (!file.warning) {
+                    successAny = true;
+                } else {
+                    dup_files.push(`${passthrough.filename}(${passthrough.name})`);
+                }
+            });
+            if (successAny) {
+                showSuccess();
+            } else {
+                showError({message: localize('Following file(s) were already uploaded: [_1]', [`[ ${dup_files.join(', ')} ]`])});
+            }
         };
     };
 
