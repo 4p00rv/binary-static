@@ -246,7 +246,7 @@ const Authenticate = (() => {
                 localize('Expiry date is required for [_1].', [file_checks[file.id].label]),
                 localize('Front and reverse side photos of [_1] are required.', [file_checks[file.id].label]),
                 // Japan Error message
-                localize('{JAPAN ONLY}My number card is required.'),
+                // localize('{JAPAN ONLY}My number card is required.'),
                 localize('{JAPAN ONLY}Please select at least one file from section 1 or two different file types from section 2.'),
                 localize('{JAPAN ONLY}One of [_1] or [_2] is required.', [localize('Medical insurance card'), localize('Pension book')]),
                 localize('{JAPAN ONLY}One of [_1], [_2] or [_3] is required.', [localize('Resident records'),
@@ -254,13 +254,13 @@ const Authenticate = (() => {
             ];
             const [format, file_size, id, id_format, expiry, proofid,multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_0_check, section_2_1_check,
+                other_files, section_2_0_check, section_2_1_check,
             ] = validations(file);
             let message = '';
 
             [format, file_size, id, id_format, expiry, proofid, multiple_side_file_check,
                 // Japan validations
-                mynumbercard, other_files, section_2_0_check, section_2_1_check,
+                other_files, section_2_0_check, section_2_1_check,
             ].forEach((e,i) => {
                 if (e) message+=`${error_messages[i]}<br />`;
             });
@@ -273,7 +273,7 @@ const Authenticate = (() => {
             const isJp = jpClient();
             const required_docs = ['passport', 'proofid', 'driverslicense'];
             // Check if both front and back sides are selected for following file ids.
-            const multiple_side_file_ids = ['proofid', 'driverslicense', 'residencecard', 'mynumbercard', 'mynumberphotocard'];
+            const multiple_side_file_ids = ['proofid', 'driverslicense', 'residencecard'];
             // Japan Only
             // check if one of the following files is selected.
             const jp_section_1   = ['driverslicense', 'residencecard', 'mynumberphotocard1'];
@@ -296,8 +296,8 @@ const Authenticate = (() => {
                 (file_checks[file.id].files[0] ^ file_checks[file.id].files[1]);// eslint-disable-line no-bitwise
 
             // Validations for japan
-            yield !needs_action && isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
-                (file_checks.mynumberphotocard && file_checks.mynumberphotocard.files[0]));
+            // yield !needs_action && isJp && !((file_checks.mynumbercard && file_checks.mynumbercard.files[0]) ||
+            //     (file_checks.mynumberphotocard && file_checks.mynumberphotocard.files[0]));
             // Check if one of the section 1&2 is file selected
             yield !needs_action && isJp && noneOfthese(...jp_section_1, ...jp_section_2_0, ...jp_section_2_1);
             // Check if both files are selected for section 2
@@ -316,9 +316,9 @@ const Authenticate = (() => {
         };
 
         const showSuccess = () => {
-            const msg = localize('We are reviewing your documents. For more details [_1]contact us[_2].',
+            const notification = localize('We are reviewing your documents. For more details [_1]contact us[_2].',
                 [`<a href="${Url.urlFor('contact')}">`, '</a>']);
-            displayNotification(msg, false, 'document_under_review');
+            displayNotification(notification , false, 'document_under_review');
             $('#not_authenticated, #not_authenticated_financial').setVisibility(0); // Just hide it
             $('#success-message').setVisibility(1);
         };

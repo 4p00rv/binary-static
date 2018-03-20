@@ -89,8 +89,9 @@ const FileSelector = ({
     instructions,
     accepted_documents,
     other_rows,
+    className
 }) => (
-    <div className='gr-row gr-12'>
+    <div className={`gr-row gr-12 ${className}`}>
         <fieldset>
             <div className='gr-padding-30 gr-gutter-left gr-gutter-right'>
                 <h2>{heading}</h2>
@@ -239,6 +240,7 @@ const AuthenticateMessage = () => (
             <SeparatorLine className='gr-padding-10' invisible />
 
             <FileSelector
+                className='invisible'
                 heading={it.L('3. My number card (compulsory)')}
                 allowed_documents={[
                     it.L('My number non-photo ID card'),
