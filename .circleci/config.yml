@@ -7,6 +7,9 @@ jobs:
       - image: docker:17.05.0-ce-git
     steps:
       - checkout
+      - run: |
+        # Install curl
+        apk add curl
       - setup_remote_docker
       - k8s/install-kubectl
       - run: |
