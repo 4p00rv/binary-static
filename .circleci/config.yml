@@ -8,8 +8,8 @@ jobs:
     steps:
       - checkout
       - run: |
-        # Install curl
-        apk add curl
+          # Install curl
+          apk add curl
       - setup_remote_docker
       - k8s/install-kubectl
       - run: |
