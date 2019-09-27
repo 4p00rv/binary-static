@@ -1,4 +1,6 @@
 version: 2.1
+orb:
+  k8s: circleci/kubernetes@0.7.0
 jobs:
   deploy:
     docker:
@@ -6,7 +8,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - k8s/install
+      - k8s/install-kubectl
       - run: |
           REPO_NAME=$(git remote get-url origin | sed -E "s/.+:[0-9a-z_-]+\/([0-9a-z_-]+)(\.git)?/\1/")
           docker build -t ${DOCKHUB_ORGANISATION}/${REPO_NAME}:${CIRCLE_SHA1} .
