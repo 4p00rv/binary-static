@@ -1,5 +1,5 @@
 version: 2.1
-orb:
+orbs:
   k8s: circleci/kubernetes@0.7.0
 jobs:
   deploy:
