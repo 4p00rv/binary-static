@@ -4,7 +4,7 @@ orbs:
 jobs:
   deploy:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:18.06.3-ce-git
     steps:
       - checkout
       - run: |
