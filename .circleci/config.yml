@@ -92,7 +92,7 @@ commands:
     steps:
       - run:
           name: Trigger robot framework tests
-          command: node_modules/grunt/bin/grunt gh-pages:trigger_tests
+          command: node_modules/grunt/bin/grunt gh-pages:trigger_tests --staging
     
 jobs:
   test:
