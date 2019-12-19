@@ -92,7 +92,10 @@ commands:
     steps:
       - run:
           name: Trigger robot framework tests
-          command: node_modules/grunt/bin/grunt gh-pages:trigger_tests --staging
+          command: |
+            git config user.email "sysadmin@binary.com"
+            git config user.name "CircleCI"
+            node_modules/grunt/bin/grunt gh-pages:trigger_tests --staging
     
 jobs:
   test:
